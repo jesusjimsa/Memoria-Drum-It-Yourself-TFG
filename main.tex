@@ -31,11 +31,11 @@ Tal y como indica la documentación sobre Arduino \cite{DocArduino}
  \begin{itemize}
     \item Programa que genere los sonidos de batería concurrentes: 1-2 meses
     \item Construcción de un prototipo de batería con sonidos concurrentes: 1-2 meses
-    \item Programa que genere diferentes sonidos de un mismo parche/platillo: 1 mes
+    \item Añadir funcionalidad que genere diferentes sonidos de un mismo parche/platillo: 1 mes
     %% El programa tiene que diferenciar el lugar en el que se golpea el parche/platillo, lo que será la mayor dificultad
     \item Añadir sensores y conexiones para generar diferentes sonidos según dónde se golpee en el parche/platillo: 1-2 semanas
     \item Aplicación web para conectar dos baterías online: 1-2 meses
-    \item Documentación: 2 semanas
+    \item Documentación: 3 semanas
 \end{itemize}
 
  \subsubsection{A posteriori (en caso de haber diferencias)} 
@@ -52,9 +52,12 @@ Tal y como indica la documentación sobre Arduino \cite{DocArduino}
  \subsection{Librería de reproducción de sonido ¿?}
  \begin{itemize}
      \item playsound\cite{playsound}: No se usa porque es muy lento y el programa que queremos crear necesita ser lo más rápido posible.
-     \item mpg123\cite{mpg123}: Librería y programa en C más rápido que playsound de Python.
+     \item mpg123\cite{mpg123}: Librería y programa en C más rápido que playsound de Python. Tiene el problema de hacer que haya fallos de memoria cuando se usan hebras para reproducir varios sonidos al mismo tiempo.
+     \item PyAudio\cite{PyAudio}: %%%%%%
  \end{itemize} 
  
+ \subsection{Problemas ¿?}
+ Error de \textit{segmentation fault} en macOS que se soluciona al ejecutar el programa en Linux 
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Diseño
