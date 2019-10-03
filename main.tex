@@ -24,23 +24,31 @@ Objetivos específicos:
 % Introducción
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introducción}\label{sec:Introduccion}
-Para empezar se decide entre hacer detección binaria de la entrada, es decir, si el parche ha sido golpeado o no, y hacer que estas entradas sean concurrentes (al golpear dos parches, el sonido de ambos suena al mismo tiempo), o hacer detección de distintos sonidos en un mismo parche, dependiendo de cómo se golpee el parche (en el centro, en el lateral, con más o menos fuerza…) el sonido emitido es diferente.
-
+Para empezar se decide entre hacer detección binaria de la entrada, es decir, si el parche ha sido golpeado o no, y hacer que estas
+entradas sean concurrentes (al golpear dos parches, el sonido de ambos suena al mismo tiempo), o hacer detección de distintos sonidos
+en un mismo parche, dependiendo de cómo se golpee el parche (en el centro, en el lateral, con más o menos fuerza…) el sonido emitido
+es diferente.\newline
 Se decide empezar con la primera alternativa y dejar la segunda para más adelante en caso de tener tiempo.
-
-Tal y como indica la documentación sobre Arduino \cite{DocArduino}
 
 \subsection{Derechos de autor}
 \subsubsection{¿Qué son los derechos de autor?}
-Los derechos de autor son una serie de leyes que protegen la autoría de las obras. Estas pueden ser libros, películas, obras de teatro, programas informáticos...\newline
-Se cubren dos tipos de derechos: los derechos patrimoniales, que aseguran que el autor obtenga compensación financiera, y los derechos morales, que cubren todo lo que no esté relacionado con los derechos patrimoniales, por ejemplo, la prohibición de que se modifique la obra.\cite{derechos_ompi}
+Los derechos de autor son una serie de leyes que protegen la autoría de las obras. Estas pueden ser libros, películas, obras de
+teatro, programas informáticos...\newline
+Se cubren dos tipos de derechos: los derechos patrimoniales, que aseguran que el autor obtenga compensación financiera, y los derechos morales, que
+cubren todo lo que no esté relacionado con los derechos patrimoniales, por ejemplo, la prohibición de que se modifique la obra.\cite{derechos_ompi}
 
 \subsubsection{Historia de los derechos de autor}
+La historia de los derechos de autor comienza en 1710, cuando se publica el Estatuto de la Reina Anna\cite{estatuto_anna}, que fue el primer reglamento sobre
+los derechos de autor. En el momento de la publicación de éste estatuto solo se contemplaban los derechos sobre los libros, pero en posteriores leyes se
+contemplan otros usos, como cine, radio, fotografías o programas de ordenador.\newline
+En la actualidad, los derechos de autor se protegen tanto con acuerdos y leyes internacionales, como leyes nacionales.
+%%%%% TODO: Añadir cuándo se añade el copyright a los programas de ordenador
 
 \subsection{Planificación}
 
  \subsubsection{A priori (optimista)}
 
+ %% TODO: Mejorar predicción de tiempos a priori
  \begin{itemize}
     \item Programa que genere los sonidos de batería concurrentes: 1-2 meses
     \item Construcción de un prototipo de batería con sonidos concurrentes: 1-2 meses
@@ -57,20 +65,38 @@ Se cubren dos tipos de derechos: los derechos patrimoniales, que aseguran que el
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Diseño de la propuesta}\label{sec:Diseno}
 
- Aquí hay que detallar y justificar las decisiones que se tomen (hacer varias propuestas pero desarrollar solo la mejor) (siempre es bueno una tabla comparativa con pros y contras o ticks)
+ Aquí hay que detallar y justificar las decisiones que se tomen (hacer varias propuestas pero desarrollar solo la mejor)
+ (siempre es bueno una tabla comparativa con pros y contras o ticks)
 
  \subsection{Librería de reproducción de sonido ¿?}
  \begin{itemize}
-     \item playsound\cite{playsound}: No se usa porque es muy lento y el programa que queremos crear necesita ser lo más rápido posible.
-     \item mpg123\cite{mpg123}: Librería y programa en C más rápido que playsound de Python. Tiene el problema de hacer que haya fallos de memoria cuando se usan hebras para reproducir varios sonidos al mismo tiempo.
+     \item
+        playsound\cite{playsound}: No se usa porque es muy lento y el programa que queremos crear necesita ser lo más rápido posible.
+     \item
+        mpg123\cite{mpg123}: Librería y programa en C más rápido que playsound de Python. Tiene el problema de hacer que haya fallos
+        de memoria cuando se usan hebras para reproducir varios sonidos al mismo tiempo, pero se soluciona utilizando procesos en su
+        lugar.
+ \end{itemize}
+
+ \subsection{Otras librerías}
+ \begin{itemize}
+     \item
+        Wiring Pi\cite{wiringPi}: Para realizar la conexión de sensores y botones a la Raspberry Pi se utiliza la librería wiringPi,
+        que es la estándar en este tema.
  \end{itemize}
 
  \subsection{Problemas ¿?}
  \begin{itemize}
-     \item Error de \textit{segmentation fault} que ocurría por utilizar hebras para reproducir varios sonidos al
-     mismo tiempo, se solucionó cambiando las hebras por procesos.
-     \item Relacionado con el problema anterior, intentando reproducir dos sonidos al mismo tiempo,
-        para reducir la posibilidad de que el usuario toque dos intrumentos al mismo tiempo
+     \item
+        Error de \textit{segmentation fault} que ocurría por utilizar hebras para reproducir
+        varios sonidos al mismo tiempo, se solucionó cambiando las hebras por procesos.
+     \item
+        Relacionado con el problema anterior, intentando reproducir dos sonidos al mismo tiempo, para reducir
+        la posibilidad de que el usuario toque dos intrumentos al mismo tiempo. En el modelo solo por procesos
+        se editan los sonidos juntos para que no haya latencia al tocar dos a la vez, haciéndolo con hebras se
+        ahorra el trabajo de editar los sonidos y no hay combinaciones no contempladas. Sin embargo, el sistema
+        de reproducción de sonido del sistema operativo no permite reproducir sonidos mediante hebras, solo
+        procesos.
  \end{itemize}
 
 
