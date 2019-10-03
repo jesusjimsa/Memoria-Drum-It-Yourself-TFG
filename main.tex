@@ -8,8 +8,11 @@
 
 \maketitle
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Objetivos
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Objetivos}\label{sec:Objetivos}
-Objetivo General: 
+Objetivo General:
 
 Objetivos específicos:
 \begin{itemize}
@@ -17,6 +20,9 @@ Objetivos específicos:
     \item OB-E2:
 \end{itemize}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Introducción
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introducción}\label{sec:Introduccion}
 Para empezar se decide entre hacer detección binaria de la entrada, es decir, si el parche ha sido golpeado o no, y hacer que estas entradas sean concurrentes (al golpear dos parches, el sonido de ambos suena al mismo tiempo), o hacer detección de distintos sonidos en un mismo parche, dependiendo de cómo se golpee el parche (en el centro, en el lateral, con más o menos fuerza…) el sonido emitido es diferente.
 
@@ -24,10 +30,17 @@ Se decide empezar con la primera alternativa y dejar la segunda para más adelan
 
 Tal y como indica la documentación sobre Arduino \cite{DocArduino}
 
+\subsection{Derechos de autor}
+\subsubsection{¿Qué son los derechos de autor?}
+Los derechos de autor son una serie de leyes que protegen la autoría de las obras. Estas pueden ser libros, películas, obras de teatro, programas informáticos...\newline
+Se cubren dos tipos de derechos: los derechos patrimoniales, que aseguran que el autor obtenga compensación financiera, y los derechos morales, que cubren todo lo que no esté relacionado con los derechos patrimoniales, por ejemplo, la prohibición de que se modifique la obra.\cite{derechos_ompi}
+
+\subsubsection{Historia de los derechos de autor}
+
 \subsection{Planificación}
 
  \subsubsection{A priori (optimista)}
- 
+
  \begin{itemize}
     \item Programa que genere los sonidos de batería concurrentes: 1-2 meses
     \item Construcción de un prototipo de batería con sonidos concurrentes: 1-2 meses
@@ -38,53 +51,48 @@ Tal y como indica la documentación sobre Arduino \cite{DocArduino}
     \item Documentación: 3 semanas
 \end{itemize}
 
- \subsubsection{A posteriori (en caso de haber diferencias)} 
- 
- 
-
+ \subsubsection{A posteriori (en caso de haber diferencias)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Diseño
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Diseño de la propuesta}\label{sec:Diseno}
 
  Aquí hay que detallar y justificar las decisiones que se tomen (hacer varias propuestas pero desarrollar solo la mejor) (siempre es bueno una tabla comparativa con pros y contras o ticks)
- 
+
  \subsection{Librería de reproducción de sonido ¿?}
  \begin{itemize}
      \item playsound\cite{playsound}: No se usa porque es muy lento y el programa que queremos crear necesita ser lo más rápido posible.
      \item mpg123\cite{mpg123}: Librería y programa en C más rápido que playsound de Python. Tiene el problema de hacer que haya fallos de memoria cuando se usan hebras para reproducir varios sonidos al mismo tiempo.
- \end{itemize} 
- 
+ \end{itemize}
+
  \subsection{Problemas ¿?}
- Error de \textit{segmentation fault} que ocurría por utilizar hebras para reproducir varios sonidos al mismo tiempo, se solucionó cambiando las hebras por procesos.
- 
+ \begin{itemize}
+     \item Error de \textit{segmentation fault} que ocurría por utilizar hebras para reproducir varios sonidos al
+     mismo tiempo, se solucionó cambiando las hebras por procesos.
+     \item Relacionado con el problema anterior, intentando reproducir dos sonidos al mismo tiempo,
+        para reducir la posibilidad de que el usuario toque dos intrumentos al mismo tiempo
+ \end{itemize}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Implementación
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Implementación de la propuesta}\label{sec:Implementacion}
 
  Poner especial atención al proceso: dificultades y problemas encontrados y cómo se han solucionado
- 
+
  \subsection{Coste y presupuesto}
-  
+
   tabla con el coste de desarrollo (incluye tu mano de obra... etc.)
-  
+
 ->  Identifica los aspectos éticos y sociales relacionados con la profesión
 
- 
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Resultados y discusión
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Resultados y discusión}\label{sec:ResultadosDisc}
 
 -> Identifica los aspectos éticos y sociales relacionados con la profesión
-
-\subsection{Derechos de autor}
-\subsubsection{¿Qué son los derechos de autor?}
-Los derechos de autor son una serie de leyes que protegen la autoría de las obras. Estas pueden ser libros, películas, obras de teatro, programas informáticos...\newline
-Se cubren dos tipos de derechos: los derechos patrimoniales, que aseguran que el autor obtenga compensación financiera, y los derechos morales, que cubren todo lo que no esté relacionado con los derechos patrimoniales, por ejemplo, la prohibición de que se modifique la obra.\cite{derechos_ompi}
-
-\subsubsection{Historia de los derechos de autor}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -93,7 +101,7 @@ Se cubren dos tipos de derechos: los derechos patrimoniales, que aseguran que el
 \section{Conclusiones}\label{sec:Conclusiones}
 
  ¿se han satisfecho los objetivos? ¿el porqué? Como se ha visto en \ref{sec:ResultadosDisc}, los o...
- 
+
 -> Identifica los aspectos éticos y sociales relacionados con la profesión
 
 
