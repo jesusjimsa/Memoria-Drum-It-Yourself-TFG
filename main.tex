@@ -24,25 +24,29 @@ Objetivos específicos:
 % Introducción
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introducción}\label{sec:Introduccion}
-Para empezar se decide entre hacer detección binaria de la entrada, es decir, si el parche ha sido golpeado o no, y hacer que estas
-entradas sean concurrentes (al golpear dos parches, el sonido de ambos suena al mismo tiempo), o hacer detección de distintos sonidos
-en un mismo parche, dependiendo de cómo se golpee el parche (en el centro, en el lateral, con más o menos fuerza…) el sonido emitido
-es diferente.\newline
+Para empezar se decide entre hacer detección binaria de la entrada, es decir, si el parche ha sido golpeado o no, y
+hacer que estas entradas sean concurrentes (al golpear dos parches, el sonido de ambos suena al mismo tiempo), o hacer
+detección de distintos sonidos en un mismo parche, dependiendo de cómo se golpee el parche (en el centro, en el lateral,
+con más o menos fuerza…) el sonido emitido es diferente.\newline
 Se decide empezar con la primera alternativa y dejar la segunda para más adelante en caso de tener tiempo.
 
 \subsection{Derechos de autor}
 \subsubsection{¿Qué son los derechos de autor?}
-Los derechos de autor son una serie de leyes que protegen la autoría de las obras. Estas pueden ser libros, películas, obras de
-teatro, programas informáticos...\newline
-Se cubren dos tipos de derechos: los derechos patrimoniales, que aseguran que el autor obtenga compensación financiera, y los derechos morales, que
-cubren todo lo que no esté relacionado con los derechos patrimoniales, por ejemplo, la prohibición de que se modifique la obra.\cite{derechos_ompi}
+Los derechos de autor son una serie de leyes que protegen la autoría de las obras. Estas pueden ser libros, películas,
+obras de teatro, programas informáticos...\newline
+Se cubren dos tipos de derechos: los derechos patrimoniales, que aseguran que el autor obtenga compensación financiera,
+y los derechos morales, que cubren todo lo que no esté relacionado con los derechos patrimoniales, por ejemplo, la
+prohibición de que se modifique la obra.\cite{derechos_ompi}
 
 \subsubsection{Historia de los derechos de autor}
-La historia de los derechos de autor comienza en 1710, cuando se publica el Estatuto de la Reina Anna\cite{estatuto_anna}, que fue el primer reglamento sobre
-los derechos de autor. En el momento de la publicación de éste estatuto solo se contemplaban los derechos sobre los libros, pero en posteriores leyes se
-contemplan otros usos, como cine, radio, fotografías o programas de ordenador.\newline
-En la actualidad, los derechos de autor se protegen tanto con acuerdos y leyes internacionales, como leyes nacionales.
-%%%%% TODO: Añadir cuándo se añade el copyright a los programas de ordenador
+La historia de los derechos de autor comienza en 1710, cuando se publica el Estatuto de la Reina Anna\cite{estatuto_anna}
+que fue el primer reglamento sobre los derechos de autor. En el momento de la publicación de éste estatuto solo se
+contemplaban los derechos sobre los libros, pero en posteriores leyes se contemplan otros usos, como cine, radio, fotografías
+o programas de ordenador.\newline
+En la actualidad, los derechos de autor se protegen tanto con acuerdos y leyes internacionales, como leyes nacionales.\newline
+Desde 1974 en Estados Unidos con la CONTU\cite{contu} (Commission on New Technological Uses of Copyrighted Works) y de 1991 en
+la Unión Europea con la Computer Programs Directive\cite{com_pro_dir}, se protegen los derechos de autor de los programas
+informáticos.
 
 \subsection{Planificación}
 
@@ -50,13 +54,20 @@ En la actualidad, los derechos de autor se protegen tanto con acuerdos y leyes i
 
  %% TODO: Mejorar predicción de tiempos a priori
  \begin{itemize}
-    \item Programa que genere los sonidos de batería concurrentes: 1-2 meses
-    \item Construcción de un prototipo de batería con sonidos concurrentes: 1-2 meses
-    \item Añadir funcionalidad que genere diferentes sonidos de un mismo parche/platillo: 1 mes
-    %% El programa tiene que diferenciar el lugar en el que se golpea el parche/platillo, lo que será la mayor dificultad
-    \item Añadir sensores y conexiones para generar diferentes sonidos según dónde se golpee en el parche/platillo: 1-2 semanas
-    \item Aplicación web para conectar dos baterías online: 1-2 meses
-    \item Documentación: 3 semanas
+    \item
+        Programa que genere los sonidos de batería concurrentes: 1-2 meses
+    \item
+        Construcción de un prototipo de batería con sonidos concurrentes: 1-2 meses
+    \item
+        Añadir funcionalidad que genere diferentes sonidos de un mismo parche/platillo: 1 mes
+    %% El programa tiene que diferenciar el lugar en el que se golpea el parche/platillo,
+    %% lo que será la mayor dificultad
+    \item
+        Añadir sensores y conexiones para generar diferentes sonidos según dónde se golpee en el parche/platillo: 1-2 semanas
+    \item
+        Aplicación web para conectar dos baterías online: 1-2 meses
+    \item
+        Documentación: 3 semanas
 \end{itemize}
 
  \subsubsection{A posteriori (en caso de haber diferencias)}
@@ -71,18 +82,19 @@ En la actualidad, los derechos de autor se protegen tanto con acuerdos y leyes i
  \subsection{Librería de reproducción de sonido ¿?}
  \begin{itemize}
      \item
-        playsound\cite{playsound}: No se usa porque es muy lento y el programa que queremos crear necesita ser lo más rápido posible.
+        playsound\cite{playsound}: No se usa porque es muy lento y el programa que queremos crear necesita ser lo más
+        rápido posible.
      \item
-        mpg123\cite{mpg123}: Librería y programa en C más rápido que playsound de Python. Tiene el problema de hacer que haya fallos
-        de memoria cuando se usan hebras para reproducir varios sonidos al mismo tiempo, pero se soluciona utilizando procesos en su
-        lugar.
+        mpg123\cite{mpg123}: Librería y programa en C más rápido que playsound de Python. Tiene el problema de hacer
+        que haya fallos de memoria cuando se usan hebras para reproducir varios sonidos al mismo tiempo, pero se
+        soluciona utilizando procesos en su lugar.
  \end{itemize}
 
  \subsection{Otras librerías}
  \begin{itemize}
      \item
-        Wiring Pi\cite{wiringPi}: Para realizar la conexión de sensores y botones a la Raspberry Pi se utiliza la librería wiringPi,
-        que es la estándar en este tema.
+        Wiring Pi\cite{wiringPi}: Para realizar la conexión de sensores y botones a la Raspberry Pi se utiliza
+        la librería wiringPi, que es la estándar en este tema.
  \end{itemize}
 
  \subsection{Problemas ¿?}
