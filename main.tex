@@ -1,5 +1,7 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
 
 \title{Desarrollo de un instrumento musical digital}
 \author{ Jesús Jiménez Sánchez }
@@ -16,7 +18,7 @@ Objetivo General:
 
 Objetivos específicos:
 \begin{itemize}
-    \item OB-E1: 
+    \item OB-E1: Planificación
     \item OB-E2:
 \end{itemize}
 
@@ -116,6 +118,48 @@ para macOS\cite{garageband}
         de reproducción de sonido del sistema operativo no permite reproducir sonidos mediante hebras, solo
         procesos.
  \end{itemize}
+
+ \subsection{Decisiones ¿?}
+
+    \subsubsection{if-else vs switch}
+    Al pulsar una tecla, el número leído se envía a una función que selecciona qué sonido hay que reproducir en
+    ese momento, dependiendo de qué sonido corresponda a ese número. Este proceso de selección se puede hacer
+    con una estructura de \textit{if-else} anidados o con un \textit{switch-case}.\newline
+    Para decir cuál de las dos soluciones se implementa en la versión final se realizó un test en el que cada
+    vez se ejecutan más iteraciones del programa cambiando de sonido en cada una de ellas. Se empieza con 1
+    iteración y se termina con 10000000 iteraciones.\newline
+    \begin{figure}[ht]
+        \centering
+        \includegraphics[width=\textwidth]{grafica_if_switch}
+        \caption{Gráfica comparativa if-else vs switch}
+    \end{figure}
+    \newline
+    \begin{center}
+        \begin{tabular}{ |c|c|c| }
+            \hline
+                iterations & if & switch \\
+                \hline\hline
+                1 & 0.000243 & 0.000270 \\
+                \hline
+                10 & 0.002797 & 0.002485 \\
+                \hline
+                100 & 0.027775 & 0.027261 \\
+                \hline
+                1000 & 0.260075 & 0.261464 \\
+                \hline
+                10000 & 0.431544 & 0.425668 \\
+                \hline
+                100000 & 1.368561 & 1.374575 \\
+                \hline
+                1000000 & 8.070825 & 7.560718 \\
+                \hline
+                10000000 & 79.199539 & 71.409653 \\
+            \hline
+        \end{tabular}
+    \end{center}
+    Como se puede ver en la gráfica, la diferencia no es apreciable hasta las 1000000 iteraciones,
+    pero después pasa a casi 8 segundos de diferencia en 10000000 iteraciones. Por esta razón se
+    ha decidido que la función utilice la estructura \textit{switch-case}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
