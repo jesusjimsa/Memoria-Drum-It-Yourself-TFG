@@ -157,9 +157,13 @@ para macOS\cite{garageband}
             \hline
         \end{tabular}
     \end{center}
-    Como se puede ver en la gráfica, la diferencia no es apreciable hasta las 1000000 iteraciones,
-    pero después pasa a casi 8 segundos de diferencia en 10000000 iteraciones. Por esta razón se
-    ha decidido que la función utilice la estructura \textit{switch-case}.
+    Como se puede ver en la gráfica, la diferencia no es apreciable hasta las 1000000 iteraciones, pero después
+    pasa a casi 8 segundos de diferencia en 10000000 iteraciones. Por esta razón se ha decidido que la función
+    utilice la estructura \textit{switch-case}.\newline
+    Finalmente, debido a la manera en la que realizan las comprobaciones de qué botones y sensores son utilizados,
+    aunque un \textit{switch-case} es más rápido, esta estructura se reserva para la versión del programa que
+    reproduce los sonidos leyendo del teclado. En el programa que controla los sensores se utiliza una estructura
+    \textit{if-else}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
