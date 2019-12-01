@@ -143,6 +143,13 @@ para macOS\cite{garageband}
         sonido muchas veces. Para solucionar esto se crea una hebra por cada botón, cuando se pulsa, entrará
         en un bucle infinito del que no saldrá hasta que el botón no sea soltado. Al usarse hebras, nos
         permite pulsar más botones al mismo tiempo.
+     \item
+        El sensor de presión devuelve muchas lecturas. Para solucionar esto a la hora de reproducir los sonidos
+        hay dos formas de solucionarlo, una es introduciendo un \textit{delay} lo suficientemente grande para
+        diferenciar dos toques del sensor, la otra solución, que ha sido la implementada, trata de bloquear el
+        sensor cada vez que se entra en uno de los tres intervalos de volumen que se han elegido, cada vez que
+        entra de deja de leer hasta que no baje la presión lo suficiente. Si la presión sube tampoco enviará
+        señal para que reproduzca sonido.
  \end{itemize}
 
  \subsection{Decisiones ¿?}
@@ -214,8 +221,8 @@ para macOS\cite{garageband}
 
  \subsection{Pads}
  Los pads son las superficies que son golpeadas para generar los sonidos. Para este proyecto se han fabricado
- usando madera, cola y gomaeva\cite{GomaEva}. El coste total es de fabricar dos pads es de 3,09\euro{}. Comparado con
- otros productos similares como los de Prologix\cite{practice_pad}, cuyo kit de práctica de 4 pads cuesta
+ usando madera, cola y gomaeva\cite{GomaEva}. El coste total es de fabricar dos pads es de 3,09\euro{}. Comparado
+ con otros productos similares como los de Prologix\cite{practice_pad}, cuyo kit de práctica de 4 pads cuesta
  \$224,99, el precio de la solución propuesta en este proyecto es sensiblemente inferior.
 
  \subsection{Coste y presupuesto}
