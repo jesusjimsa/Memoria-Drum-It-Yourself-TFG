@@ -5,7 +5,6 @@
 \usepackage[inline]{enumitem}
 \usepackage{graphicx}
 \usepackage[official]{eurosym}
-\usepackage{listings}
 
 \graphicspath{ {./images/} }
 
@@ -194,10 +193,12 @@
             La construcción de la cadena de texto que contenía el \textit{path} se hacía mediante las funciones de
             copia y concatenación \textit{strcat} y \textit{strdup}. El problema es que al recibir el \textit{path},
             la biblioteca de reproducción de sonidos lanzaba el siguiente error:
+
             \begin{verbatim}
             malloc(): corrupted top size
             make: *** [Makefile:19: run] Segmentation fault
             \end{verbatim}
+
             Tras muchas pruebas, como aumentar la cantidad de memoria reservada para el \textit{path} o para el
             buffer que se utiliza en la función de reproducción, o probar a que siempre se enviara el mismo path,
             sin leer del Arduino (reproduciendo el sonido satisfactoriamente), finalmente decido cambiar la forma en
@@ -222,17 +223,17 @@
         a diseñar una nueva. Esta nueva solución es la que se utiliza actualmente en el proyecto. Consiste en mandar
         todas las señales al mismo tiempo. Antes de la implementación de esta solución, el log era así:
 
-        \begin{lstlisting}
+        \begin{verbatim}
         0:0
         0:0
         2:364
         0:0
         0:0
-        \end{lstlisting}
+        \end{verbatim}
 
         Tras la implementación de la solución, el log es así:
 
-        \begin{lstlisting}
+        \begin{verbatim}
         0:0
         0:0
         1:446:2:0:3:812:4:0:5:0
@@ -240,7 +241,7 @@
         0:0
         1:0:2:0:3:0:4:902:5:0
         0:0
-        \end{lstlisting}
+        \end{verbatim}
 
         En cuanto un sensor detecta una presión mayor a 200, se manda el mensaje de todos los sensores al mismo tiempo.
         En caso de que el valor leído sea menor que 200, se manda como 0, pero si es mayor, se manda con los demás. Este
@@ -271,9 +272,6 @@
                 \includegraphics[width=\textwidth]{grafica_if_switch}
                 \caption{Gráfica comparativa if-else vs switch}
             \end{figure}
-
-            \newline
-
             \begin{center}
                 \begin{tabular}{ |c|c|c| }
                     \hline
@@ -405,7 +403,7 @@
 \section{Conclusiones}
 \label{sec:Conclusiones}
 
-    ¿se han satisfecho los objetivos? ¿el porqué? Como se ha visto en \ref{sec:ResultadosDisc}, los o...
+    ¿se han satisfecho los objetivos? ¿el porqué? Como se ha visto en \ref{sec:ResultadosyDiscusion}, los o...
 
     -> Identifica los aspectos éticos y sociales relacionados con la profesión
 
