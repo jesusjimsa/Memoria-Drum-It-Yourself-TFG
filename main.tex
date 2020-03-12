@@ -46,6 +46,7 @@
     hacer que estas entradas sean concurrentes (al golpear dos parches, el sonido de ambos suena al mismo tiempo), o
     hacer detección de distintos sonidos en un mismo parche, dependiendo de cómo se golpee el parche (en el centro, en
     el lateral, con más o menos fuerza…) el sonido emitido es diferente.\newline
+
     Se decide empezar con la primera alternativa y dejar la segunda para más adelante en caso de tener tiempo.
 
     \subsection{Derechos de autor} % (fold)
@@ -55,6 +56,7 @@
 
             Los derechos de autor son una serie de leyes que protegen la autoría de las obras. Estas pueden ser libros,
             películas, obras de teatro, programas informáticos...\newline
+
             Se cubren dos tipos de derechos: los derechos patrimoniales, que aseguran que el autor obtenga compensación
             financiera, y los derechos morales, que cubren todo lo que no esté relacionado con los derechos
             patrimoniales, por ejemplo, la prohibición de que se modifique la obra.\cite{derechos_ompi}
@@ -68,8 +70,10 @@
             Anna\cite{estatuto_anna} que fue el primer reglamento sobre los derechos de autor. En el momento de la
             publicación de éste estatuto solo se contemplaban los derechos sobre los libros, pero en posteriores leyes
             se contemplan otros usos, como cine, radio, fotografías o programas de ordenador.\newline
+
             En la actualidad, los derechos de autor se protegen tanto con acuerdos y leyes internacionales, como leyes
             nacionales.\newline
+
             Desde 1974 en Estados Unidos con la CONTU\cite{contu} (Commission on New Technological Uses of Copyrighted
             Works) y de 1991 en la Unión Europea con la Computer Programs Directive\cite{com_pro_dir}, se protegen los
             derechos de autor de los programas informáticos.
@@ -203,6 +207,51 @@
 
     % subsection Problemas (end)
 
+    \subsection{Sonido en paralelo} % (fold)
+    \label{sub:SonidoEnParalelo}
+
+        Hasta febrero, todas las versiones del programa fueron diseñadas pensando solo en emitir un sonido cada vez,
+        pero lo preferible en un proyecto como este es que se emita más de un sonido al mismo tiempo.\newline
+
+        El primer acercamiento fue mediante un sistema de máximos y sonidos combinados. En esta primera solución, se
+        escogía el mayor de los seis sonidos y, si había un segundo sonido con un valor mayor que 200 (el mínimo para
+        emitir sonido), se enviaba un mensaje a través del log de Arduino seleccionando un sonido combinado. Estos
+        sonidos habían sido combinados previamente utilizando los sonidos ya presentes en el proyecto.\newline
+
+        Finalmente, esta solución no funcionó correctamente (no se enviaba la señal del sonido combinado) y se procedió
+        a diseñar una nueva. Esta nueva solución es la que se utiliza actualmente en el proyecto. Consiste en mandar
+        todas las señales al mismo tiempo. Antes de la implementación de esta solución, el log era así:
+
+        \begin{lstlisting}
+        0:0
+        0:0
+        2:364
+        0:0
+        0:0
+        \end{lstlisting}
+
+        Tras la implementación de la solución, el log es así:
+
+        \begin{lstlisting}
+        0:0
+        0:0
+        1:446:2:0:3:812:4:0:5:0
+        0:0
+        0:0
+        1:0:2:0:3:0:4:902:5:0
+        0:0
+        \end{lstlisting}
+
+        En cuanto un sensor detecta una presión mayor a 200, se manda el mensaje de todos los sensores al mismo tiempo.
+        En caso de que el valor leído sea menor que 200, se manda como 0, pero si es mayor, se manda con los demás. Este
+        mensaje es leído y procesado por la Raspberry Pi, que lanzará los procesos necesarios con los sonidos que hagan
+        falta según los sensores que hayan sido presionados.\newline
+
+        Con esta segunda propuesta, el programa envía correctamente la señal de todos los sensores y los sonidos son
+        emitidos correctamente.
+
+    % subsection Sonido en paralelo (end)
+
     \subsection{Decisiones ¿?} % (fold)
     \label{sub:Decisiones}
 
@@ -212,6 +261,7 @@
             Al pulsar una tecla, el número leído se envía a una función que selecciona qué sonido hay que reproducir en
             ese momento, dependiendo de qué sonido corresponda a ese número. Este proceso de selección se puede hacer
             con una estructura de \textit{if-else} anidados o con un \textit{switch-case}.\newline
+
             Para decir cuál de las dos soluciones se implementa en la versión final se realizó un test en el que cada
             vez se ejecutan más iteraciones del programa cambiando de sonido en cada una de ellas. Se empieza con 1
             iteración y se termina con 10000000 iteraciones.\newline
@@ -251,6 +301,7 @@
             Como se puede ver en la gráfica, la diferencia no es apreciable hasta las 1000000 iteraciones, pero después
             pasa a casi 8 segundos de diferencia en 10000000 iteraciones. Por esta razón se ha decidido que la función
             utilice la estructura \textit{switch-case}.\newline
+
             Finalmente, debido a la manera en la que realizan las comprobaciones de qué botones y sensores son
             utilizados, aunque un \textit{switch-case} es más rápido, esta estructura se reserva para la versión del
             programa que reproduce los sonidos leyendo del teclado. En el programa que controla los sensores se utiliza
@@ -266,12 +317,15 @@
         Para la recepción de las señales del sensor de presión RP c18.3, se plantean dos opciones, se puede utilizar
         la propia Raspberry Pi en la que se ejecuta el programa que maneja los sonidos o una Arduino Nano. En el
         proyecto resultante se utiliza finalmente la Arduino debido a dos razones principales.\newline
+
         La primera razón es el precio y la escalabilidad, una Raspberry Pi cuesta 39,95\euro{} mientras que una
         Arduino Nano cuesta 10\euro{}. Una Arduino Nano cuenta con menos pines de E/S, pero añadir una placa es más
         barato y sencillo que añadir una placa de Raspberry Pi.\newline
+
         La segunda razón es la implementación del programa que se encarga de el sensor de presión. En Internet se
         pueden encontrar ejemplos y tutoriales refiriéndose a cómo implementar el sistema en una Arduino, pero no
         es tan fácil encontrar información para hacerlo desde una Raspberry Pi.\newline
+
         Por estas razones se elige realizar la recepción de las señales del sensor de presión desde la Arduino,
         haciendo el proceso más sencillo y más barato.
 
@@ -326,6 +380,7 @@
 
             Para medir el tiempo que ha llevado realizar este trabajo, se ha utilizado la aplicación
             Clockify\cite{clockify}.\newline
+
             En total se han utilizado 74 horas y 24 minutos.%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
