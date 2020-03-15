@@ -148,6 +148,7 @@
                 \includegraphics[width=\textwidth]{grafica_if_switch}
                 \caption{Gráfica comparativa if-else vs switch}
             \end{figure}
+
             \begin{center}
                 \begin{tabular}{ |c|c|c| }
                     \hline
@@ -185,8 +186,8 @@
 
     % section Decisiones (end)
 
-    \subsection{Arduino} % (fold)
-    \label{sub:Arduino}
+    \section{Arduino} % (fold)
+    \label{sec:Arduino}
 
         Para la recepción de las señales del sensor de presión RP c18.3, se plantean dos opciones, se puede utilizar
         la propia Raspberry Pi en la que se ejecuta el programa que maneja los sonidos o una Arduino Nano. En el
@@ -203,6 +204,20 @@
         Por estas razones se elige realizar la recepción de las señales del sensor de presión desde la Arduino,
         haciendo el proceso más sencillo y más barato.
 
-    % subsection Arduino (end)
+        \subsection{Conexión} % (fold)
+        \label{sub:Conexion}
+
+            Para realizar la conexión de los sensores se utilizan cables de protoboard conectados de la siguiente
+            manera:
+
+            \begin{figure}[ht]
+                \centering
+                \includegraphics[width=\textwidth]{force_sensor_arduino}
+                \caption{Esquema de conexión de sensores de presión}
+            \end{figure}
+        
+        % subsection Conexión (end)
+
+    % section Arduino (end)
 
 % chapter Diseño (end)
