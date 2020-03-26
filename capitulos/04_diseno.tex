@@ -8,129 +8,43 @@
     Aquí hay que detallar y justificar las decisiones que se tomen (hacer varias propuestas pero desarrollar solo la
     mejor) (siempre es bueno una tabla comparativa con pros y contras o ticks)
 
-    \section{Librería de reproducción de sonido ¿?} % (fold)
-    \label{sec:LibreriaDeReproduccionDeSonido}
+    \section{Decisiones tomadas} % (fold)
+    \label{sec:DecisionesTomadas}
 
-        \begin{itemize}
-            \item
-            playsound\cite{playsound}: Al principio se comenzó buscando implementar el proyecto en Python, por ser un
-            lenguaje sencillo y con gran variedad de librerías. Sin embargo, tras probar playsound, la librería de
-            reproducción de sonidos más popular de Python, se decidió que era muy lenta, y en este proyecto, la
-            velocidad a la que se reproducen los sonidos es primordial. Por esta razón, se descarta playsound.
-            \item
-            mpg123\cite{mpg123}: Librería y programa en C más rápido que playsound de Python. Tiene el problema de
-            hacer que haya fallos de memoria cuando se usan hebras para reproducir varios sonidos al mismo tiempo, pero
-            se soluciona utilizando procesos en su lugar.
-        \end{itemize}
+        La primera decisión fue entre hacer detección binaria de la entrada, es decir, si el parche ha sido golpeado o
+        no, y hacer que estas entradas sean concurrentes (al golpear dos parches, el sonido de ambos suena al mismo
+        tiempo), o hacer detección de distintos sonidos en un mismo parche, dependiendo de cómo se golpee el parche (en
+        el centro, en el lateral, con más o menos fuerza…) el sonido emitido es diferente.\newline
 
-    % section Librería de reproducción de sonido (end)
+        Se decide empezar con la primera alternativa y dejar la segunda para más adelante, en caso de tener tiempo.
 
-    \section{Otras librerías} % (fold)
-    \label{sec:OtrasLibrerias}
+        \subsection{Librería de reproducción de sonido ¿?} % (fold)
+        \label{sub:LibreriaDeReproduccionDeSonido}
 
-        \begin{itemize}
-            \item
-            Wiring Pi\cite{wiringPi}: Para realizar la conexión de sensores y botones a la Raspberry Pi se utiliza
-            la librería wiringPi, que es la estándar en este tema.
-        \end{itemize}
+            \begin{itemize}
+                \item
+                playsound\cite{playsound}: Al principio se comenzó buscando implementar el proyecto en Python, por ser
+                un lenguaje sencillo y con gran variedad de librerías. Sin embargo, tras probar playsound, la librería
+                de reproducción de sonidos más popular de Python, se decidió que era muy lenta, y en este proyecto, la
+                velocidad a la que se reproducen los sonidos es primordial. Por esta razón, se descarta playsound.
+                \item
+                mpg123\cite{mpg123}: Librería y programa en C más rápido que playsound de Python. Tiene el problema de
+                hacer que haya fallos de memoria cuando se usan hebras para reproducir varios sonidos al mismo tiempo,
+                pero se soluciona utilizando procesos en su lugar.
+            \end{itemize}
 
-    % section Otras librerías (end)
+        % subsection Librería de reproducción de sonido (end)
 
-    \section{Problemas ¿?} % (fold)
-    \label{sec:Problemas}
+        \subsection{Otras librerías} % (fold)
+        \label{sub:OtrasLibrerias}
 
-        \begin{itemize}
-            \item
-            Debido a la librería utilizada para reproducir sonidos, al lanzar hebras para reproducir varios sonidos al
-            mismo tiempo, se producía en error de \textit{segmentation fault}. La solución a este problema fue sustituir
-            las hebras por procesos.
-            % \item
-            % Relacionado con el problema anterior, intentando reproducir dos sonidos al mismo tiempo, para reducir
-            % la posibilidad de que el usuario toque dos instrumentos al mismo tiempo. En el modelo solo por procesos
-            % se editan los sonidos juntos para que no haya latencia al tocar dos a la vez, haciéndolo con hebras se
-            % ahorra el trabajo de editar los sonidos y no hay combinaciones no contempladas. Sin embargo, el sistema
-            % de reproducción de sonido del sistema operativo no permite reproducir sonidos mediante hebras, solo
-            % procesos.
-            \item
-            En el prototipo con botones, al pulsar o dejar pulsado un botón, el programa reproduciría el mismo
-            sonido muchas veces. Para solucionar esto se crea una hebra por cada botón, cuando se pulsa, entrará
-            en un bucle infinito del que no saldrá hasta que el botón no sea soltado. Al usarse hebras, nos
-            permite pulsar más botones al mismo tiempo.
-            \item
-            El sensor de presión devuelve muchas lecturas por segundo. Para solucionar esto a la hora de reproducir los
-            sonidos hay dos formas de solucionarlo: una es introduciendo un \textit{delay} lo suficientemente grande
-            para diferenciar dos toques del sensor, la otra solución, que ha sido la implementada, trata de bloquear el
-            sensor cada vez que se entra en uno de los tres intervalos de volumen que se han elegido, cada vez que entra
-            de deja de leer hasta que no baje la presión lo suficiente. Si la presión sube tampoco enviará señal para
-            que reproduzca sonido.
-            \item
-            Al añadir el sensor y el Arduino, el programa que controlaba los sonidos emitidos recibía las mediciones
-            del Arduino y, dependiendo de los datos entregados por éste, se emite un sonido a un volumen concreto.
-            La construcción de la cadena de texto que contenía el \textit{path} se hacía mediante las funciones de
-            copia y concatenación \textit{strcat} y \textit{strdup}. El problema es que al recibir el \textit{path},
-            la biblioteca de reproducción de sonidos lanzaba el siguiente error:
+            \begin{itemize}
+                \item
+                Wiring Pi\cite{wiringPi}: Para realizar la conexión de sensores y botones a la Raspberry Pi se utiliza
+                la librería wiringPi, que es la estándar en este tema.
+            \end{itemize}
 
-            \begin{verbatim}
-            malloc(): corrupted top size
-            make: *** [Makefile:19: run] Segmentation fault
-            \end{verbatim}
-
-            Tras muchas pruebas, como aumentar la cantidad de memoria reservada para el \textit{path} o para el
-            buffer que se utiliza en la función de reproducción, o probar a que siempre se enviara el mismo path,
-            sin leer del Arduino (reproduciendo el sonido satisfactoriamente), finalmente decido cambiar la forma en
-            la que se genera el path, \textit{hardcodeándolo} en el programa. Esto resulta funcionar y es la solución
-            que ha sido implementada en el programa.
-        \end{itemize}
-
-    % section Problemas (end)
-
-    \section{Sonido en paralelo} % (fold)
-    \label{sec:SonidoEnParalelo}
-
-        Hasta febrero, todas las versiones del programa fueron diseñadas pensando solo en emitir un sonido cada vez,
-        pero lo preferible en un proyecto como este es que se emita más de un sonido al mismo tiempo.\newline
-
-        El primer acercamiento fue mediante un sistema de máximos y sonidos combinados. En esta primera solución, se
-        escogía el mayor de los seis sonidos y, si había un segundo sonido con un valor mayor que 200 (el mínimo para
-        emitir sonido), se enviaba un mensaje a través del log de Arduino seleccionando un sonido combinado. Estos
-        sonidos habían sido combinados previamente utilizando los sonidos ya presentes en el proyecto.\newline
-
-        Finalmente, esta solución no funcionó correctamente (no se enviaba la señal del sonido combinado) y se procedió
-        a diseñar una nueva. Esta nueva solución es la que se utiliza actualmente en el proyecto. Consiste en mandar
-        todas las señales al mismo tiempo. Antes de la implementación de esta solución, el log era así:
-
-        \begin{verbatim}
-        0:0
-        0:0
-        2:364
-        0:0
-        0:0
-        \end{verbatim}
-
-        Tras la implementación de la solución, el log es así:
-
-        \begin{verbatim}
-        0:0
-        0:0
-        1:446:2:0:3:812:4:0:5:0
-        0:0
-        0:0
-        1:0:2:0:3:0:4:902:5:0
-        0:0
-        \end{verbatim}
-
-        En cuanto un sensor detecta una presión mayor a 200, se manda el mensaje de todos los sensores al mismo tiempo.
-        En caso de que el valor leído sea menor que 200, se manda como 0, pero si es mayor, se manda con los demás. Este
-        mensaje es leído y procesado por la Raspberry Pi, que lanzará los procesos necesarios con los sonidos que hagan
-        falta según los sensores que hayan sido presionados.\newline
-
-        Con esta segunda propuesta, el programa envía correctamente la señal de todos los sensores y los sonidos son
-        emitidos correctamente.
-
-    % section Sonido en paralelo (end)
-
-    \section{Decisiones ¿?} % (fold)
-    \label{sec:Decisiones}
+        % subsection Otras librerías (end)
 
         \subsection{if-else vs switch} % (fold)
         \label{sub:if-else_vs_switch}
@@ -184,7 +98,7 @@
 
         % subsection if-else vs switch (end)
 
-    % section Decisiones (end)
+    % section Decisiones tomadas (end)
 
     \section{Arduino} % (fold)
     \label{sec:Arduino}

@@ -7,25 +7,116 @@
 
     Poner especial atención al proceso: dificultades y problemas encontrados y cómo se han solucionado
 
-        \section{Pads} % (fold)
-        \label{sec:Pads}
+    \section{Sonido en paralelo} % (fold)
+    \label{sec:SonidoEnParalelo}
 
-            Los pads son las superficies que son golpeadas para generar los sonidos. Para este proyecto se han fabricado
-            usando madera, cola y gomaeva\cite{GomaEva}. El coste total es de fabricar dos pads es de 3,09\euro{}.
-            Comparado con otros productos similares como los de Prologix\cite{practice_pad}, cuyo kit de práctica de 4
-            pads cuesta \$224,99, el precio de la solución propuesta en este proyecto es sensiblemente inferior.
+        Hasta febrero, todas las versiones del programa fueron diseñadas pensando solo en emitir un sonido cada vez,
+        pero lo preferible en un proyecto como este es que se emita más de un sonido al mismo tiempo.\newline
 
-        % section Pads (end)
+        El primer acercamiento fue mediante un sistema de máximos y sonidos combinados. En esta primera solución, se
+        escogía el mayor de los seis sonidos y, si había un segundo sonido con un valor mayor que 200 (el mínimo para
+        emitir sonido), se enviaba un mensaje a través del log de Arduino seleccionando un sonido combinado. Estos
+        sonidos habían sido combinados previamente utilizando los sonidos ya presentes en el proyecto.\newline
 
-        \section{Coste y presupuesto} % (fold)
-        \label{sec:CosteYPresupuesto}
+        Finalmente, esta solución no funcionó correctamente (no se enviaba la señal del sonido combinado) y se procedió
+        a diseñar una nueva. Esta nueva solución es la que se utiliza actualmente en el proyecto. Consiste en mandar
+        todas las señales al mismo tiempo. Antes de la implementación de esta solución, el log era así:
 
-            tabla con el coste de desarrollo (incluye tu mano de obra... etc.)
+        \begin{verbatim}
+        0:0
+        0:0
+        2:364
+        0:0
+        0:0
+        \end{verbatim}
 
-        % section Coste y presupuesto (end)
+        Tras la implementación de la solución, el log es así:
 
-        \section{Materiales} % (fold)
-        \label{sec:Materiales}
+        \begin{verbatim}
+        0:0
+        0:0
+        1:446:2:0:3:812:4:0:5:0
+        0:0
+        0:0
+        1:0:2:0:3:0:4:902:5:0
+        0:0
+        \end{verbatim}
+
+        En cuanto un sensor detecta una presión mayor a 200, se manda el mensaje de todos los sensores al mismo tiempo.
+        En caso de que el valor leído sea menor que 200, se manda como 0, pero si es mayor, se manda con los demás. Este
+        mensaje es leído y procesado por la Raspberry Pi, que lanzará los procesos necesarios con los sonidos que hagan
+        falta según los sensores que hayan sido presionados.\newline
+
+        Con esta segunda propuesta, el programa envía correctamente la señal de todos los sensores y los sonidos son
+        emitidos correctamente.
+
+    % section Sonido en paralelo (end)
+
+    \section{Problemas} % (fold)
+    \label{sec:Problemas}
+
+        \begin{itemize}
+            \item
+            Debido a la librería utilizada para reproducir sonidos, al lanzar hebras para reproducir varios sonidos al
+            mismo tiempo, se producía en error de \textit{segmentation fault}. La solución a este problema fue sustituir
+            las hebras por procesos.
+            % \item
+            % Relacionado con el problema anterior, intentando reproducir dos sonidos al mismo tiempo, para reducir
+            % la posibilidad de que el usuario toque dos instrumentos al mismo tiempo. En el modelo solo por procesos
+            % se editan los sonidos juntos para que no haya latencia al tocar dos a la vez, haciéndolo con hebras se
+            % ahorra el trabajo de editar los sonidos y no hay combinaciones no contempladas. Sin embargo, el sistema
+            % de reproducción de sonido del sistema operativo no permite reproducir sonidos mediante hebras, solo
+            % procesos.
+            \item
+            En el prototipo con botones, al pulsar o dejar pulsado un botón, el programa reproduciría el mismo
+            sonido muchas veces. Para solucionar esto se crea una hebra por cada botón, cuando se pulsa, entrará
+            en un bucle infinito del que no saldrá hasta que el botón no sea soltado. Al usarse hebras, nos
+            permite pulsar más botones al mismo tiempo.
+            \item
+            El sensor de presión devuelve muchas lecturas por segundo. Para solucionar esto a la hora de reproducir los
+            sonidos hay dos formas de solucionarlo: una es introduciendo un \textit{delay} lo suficientemente grande
+            para diferenciar dos toques del sensor, la otra solución, que ha sido la implementada, trata de bloquear el
+            sensor cada vez que se entra en uno de los tres intervalos de volumen que se han elegido, cada vez que entra
+            de deja de leer hasta que no baje la presión lo suficiente. Si la presión sube tampoco enviará señal para
+            que reproduzca sonido.
+            \item
+            Al añadir el sensor y el Arduino, el programa que controlaba los sonidos emitidos recibía las mediciones
+            del Arduino y, dependiendo de los datos entregados por éste, se emite un sonido a un volumen concreto.
+            La construcción de la cadena de texto que contenía el \textit{path} se hacía mediante las funciones de
+            copia y concatenación \textit{strcat} y \textit{strdup}. El problema es que al recibir el \textit{path},
+            la biblioteca de reproducción de sonidos lanzaba el siguiente error:
+
+            \begin{verbatim}
+            malloc(): corrupted top size
+            make: *** [Makefile:19: run] Segmentation fault
+            \end{verbatim}
+
+            Tras muchas pruebas, como aumentar la cantidad de memoria reservada para el \textit{path} o para el
+            buffer que se utiliza en la función de reproducción, o probar a que siempre se enviara el mismo path,
+            sin leer del Arduino (reproduciendo el sonido satisfactoriamente), finalmente decido cambiar la forma en
+            la que se genera el path, \textit{hardcodeándolo} en el programa. Esto resulta funcionar y es la solución
+            que ha sido implementada en el programa.
+        \end{itemize}
+
+    % section Problemas (end)
+
+    \section{Pads} % (fold)
+    \label{sec:Pads}
+
+        Los pads son las superficies que son golpeadas para generar los sonidos. Para este proyecto se han fabricado
+        usando madera, cola y gomaeva\cite{GomaEva}. El coste total es de fabricar dos pads es de 3,09\euro{}.
+        Comparado con otros productos similares como los de Prologix\cite{practice_pad}, cuyo kit de práctica de 4
+        pads cuesta \$224,99, el precio de la solución propuesta en este proyecto es sensiblemente inferior.
+
+    % section Pads (end)
+
+    \section{Coste y presupuesto} % (fold)
+    \label{sec:CosteYPresupuesto}
+
+        tabla con el coste de desarrollo (incluye tu mano de obra... etc.)
+
+        \subsection{Materiales} % (fold)
+        \label{sub:Materiales}
 
             \begin{itemize}
                 \item Dos hojas de goma eva: 1,20\euro{}
@@ -39,18 +130,21 @@
                 \item Arduino Nano: 15,43\euro{} (incluye gastos de envío)
             \end{itemize}
 
-        % section Materiales (end)
+        % subsection Materiales (end)
 
-        \section{Tiempo} % (fold)
-        \label{sec:Tiempo}
+    % section Coste y presupuesto (end)
 
-            Para medir el tiempo que ha llevado realizar este trabajo, se ha utilizado la aplicación
-            Clockify\cite{clockify}.\newline
 
-            En total se han utilizado 74 horas y 24 minutos.%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \section{Tiempo} % (fold)
+    \label{sec:Tiempo}
 
-        % section Tiempo (end)
+        Para medir el tiempo que ha llevado realizar este trabajo, se ha utilizado la aplicación
+        Clockify\cite{clockify}.\newline
+
+        En total se han utilizado 74 horas y 24 minutos.%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    % section Tiempo (end)
 
 % chapter Implementación (end)
