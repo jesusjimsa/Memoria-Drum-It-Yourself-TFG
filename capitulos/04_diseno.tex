@@ -53,7 +53,7 @@
             ese momento, dependiendo de qué sonido corresponda a ese número. Este proceso de selección se puede hacer
             con una estructura de \textit{if-else} anidados o con un \textit{switch-case}.\newline
 
-            Para decir cuál de las dos soluciones se implementa en la versión final se realizó un test en el que cada
+            Para decidir cuál de las dos soluciones se implementa en la versión final se realizó un test en el que cada
             vez se ejecutan más iteraciones del programa cambiando de sonido en cada una de ellas. Se empieza con 1
             iteración y se termina con 10000000 iteraciones.\newline
 
@@ -87,14 +87,14 @@
                 \end{tabular}
             \end{center}
 
-            Como se puede ver en la gráfica, la diferencia no es apreciable hasta las 1000000 iteraciones, pero después
-            pasa a casi 8 segundos de diferencia en 10000000 iteraciones. Por esta razón se ha decidido que la función
-            utilice la estructura \textit{switch-case}.\newline
+            Como se puede ver en la figura \ref{fig:GraficaIfVsSwitch}, la diferencia no es apreciable hasta las
+            1000000 iteraciones, pero después pasa a casi 8 segundos de diferencia en 10000000 iteraciones. Por
+            esta razón se ha decidido que la función utilice la estructura \textit{switch-case}.\newline
 
             Finalmente, debido a la manera en la que realizan las comprobaciones de qué botones y sensores son
             utilizados, aunque un \textit{switch-case} es más rápido, esta estructura se reserva para la versión del
-            programa que reproduce los sonidos leyendo del teclado. En el programa que controla los sensores se utiliza
-            una estructura \textit{if-else}.
+            programa que reproduce los sonidos leyendo del teclado. En el programa que controla los sensores se
+            utiliza una estructura \textit{if-else}.
 
         % subsection if-else vs switch (end)
 
@@ -121,8 +121,8 @@
         \subsection{Conexión} % (fold)
         \label{sub:Conexion}
 
-            Para realizar la conexión de los sensores se utilizan cables de protoboard conectados de la siguiente
-            manera:
+            Para realizar la conexión de los sensores se utilizan cables de protoboard conectados de la forma
+            explicada en la figura \ref{fig:EsquemaConexion}:
 
             \begin{figure}[ht]
                 \centering
