@@ -5,19 +5,17 @@
 \chapter{Implementación de la propuesta}
 \label{cha:Implementacion}
 
-    Poner especial atención al proceso: dificultades y problemas encontrados y cómo se han solucionado
-
     \section{Reproducción de sonido} % (fold)
     \label{sec:ReproduccionDeSonido}
 
         La reproducción del sonido se realiza utilizando las dos librerías mencionadas en el capítulo
-        anterior\ref{sub:LibreriaDeReproduccionDeSonido}, mpg123 y libao.
+        anterior \ref{sub:LibreriaDeReproduccionDeSonido}, mpg123 y libao.
 
         El proceso completo que se sigue desde que se pulsa uno de los sensores hasta que se reproduce el sonido es el
         siguiente:
         \begin{enumerate}
             \item Uno de los sensores de presión realiza una lectura y manda el valor leído a la placa Arduino.
-            \item El Arduino, prepara un mensaje que escribe en el log del monitor serie\ref{sec:SonidoEnParalelo}.
+            \item El Arduino, prepara un mensaje que escribe en el log del monitor serie (\ref{sec:SonidoEnParalelo}).
             \item La función \texttt{readSerial} lee de \textit{/dev/ttyACM0}, la salida del monitor serie, filtra que
             no sea un mensaje vacío o de que no hay que reproducir nada y se manda a parsear.
             \item En \texttt{parseInstruments} se procesa el mensaje leído.
