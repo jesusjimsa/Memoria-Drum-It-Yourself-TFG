@@ -139,7 +139,9 @@
             \begin{itemize}
                 \item
                 Wiring Pi\cite{wiringPi}: Para realizar la conexión de sensores y botones a la Raspberry Pi se utiliza
-                la librería wiringPi, que es la estándar en este tema.
+                la librería wiringPi, que es la estándar en este tema. Esta librería se ha utilizado unicamente en los
+                prototipos, ya que al principio se pretendía realizar el proyecto enteramente en la Raspberry Pi, pero
+                finalmente se ha utilizado una Arduino para realizar la lectura de sensores.
             \end{itemize}
 
         % subsection Otras librerías (end)
@@ -201,9 +203,9 @@
     \section{Arduino vs Raspberry Pi} % (fold)
     \label{sec:ArduinoVsRaspberryPi}
 
-        Para la recepción de las señales del sensor de presión RP c18.3, se plantean dos opciones, se puede utilizar
-        la propia Raspberry Pi en la que se ejecuta el programa que maneja los sonidos o una Arduino Nano. En el
-        proyecto resultante se utiliza finalmente la Arduino debido a dos razones principales.\newline
+        Para la recepción de las señales de los sensores de presión RP c18.3 y RP S40, se plantean dos opciones, se
+        puede utilizar la propia Raspberry Pi en la que se ejecuta el programa que maneja los sonidos o una Arduino
+        Nano. En el proyecto resultante se utiliza finalmente la Arduino debido a dos razones principales.\newline
 
         La primera razón es el precio y la escalabilidad, una Raspberry Pi cuesta 39,95\euro{} mientras que una
         Arduino Nano cuesta 10\euro{}. Una Arduino Nano cuenta con menos pines de E/S, pero añadir una placa es más
