@@ -112,7 +112,7 @@
 
         Se decide empezar con la primera alternativa y dejar la segunda para más adelante, en caso de tener tiempo.
 
-        \subsection{Librería de reproducción de sonido ¿?} % (fold)
+        \subsection{Librería de reproducción de sonido} % (fold)
         \label{sub:LibreriaDeReproduccionDeSonido}
 
             \begin{itemize}
@@ -125,6 +125,10 @@
                 mpg123\cite{mpg123}: Librería y programa en C más rápido que playsound de Python. Tiene el problema de
                 hacer que haya fallos de memoria cuando se usan hebras para reproducir varios sonidos al mismo tiempo,
                 pero se soluciona utilizando procesos en su lugar.
+                \item
+                libao\cite{libao}: Esta librería se usa en conjunto con mpg123 para reproducir el sonido de la batería.
+                mpg123 es la encargada de descodificar el archivo mp3 que contiene el sonido, mientras que libao utiliza
+                la información que obtiene mpg123 y manda la señal al sistema operativo para reproducir el audio.
             \end{itemize}
 
         % subsection Librería de reproducción de sonido (end)
