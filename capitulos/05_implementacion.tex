@@ -7,6 +7,27 @@
 
     Poner especial atención al proceso: dificultades y problemas encontrados y cómo se han solucionado
 
+    \section{Reproducción de sonido} % (fold)
+    \label{sec:ReproduccionDeSonido}
+
+        La reproducción del sonido se realiza utilizando las dos librerías mencionadas en el capítulo
+        anterior\ref{sub:LibreriaDeReproduccionDeSonido}, mpg123 y libao.
+
+        El proceso completo que se sigue desde que se pulsa uno de los sensores hasta que se reproduce el sonido es el
+        siguiente:
+        \begin{enumerate}
+            \item Uno de los sensores de presión realiza una lectura y manda el valor leído a la placa Arduino.
+            \item El Arduino, prepara un mensaje que escribe en el log del monitor serie\ref{sec:SonidoEnParalelo}.
+            \item La función \texttt{readSerial} lee de \textit{/dev/ttyACM0}, la salida del monitor serie, filtra que
+            no sea un mensaje vacío o de que no hay que reproducir nada y se manda a parsear.
+            \item En \texttt{parseInstruments} se procesa el mensaje leído.
+            \item En la función \texttt{PressToPlay} se selecciona qué instrumento debe sonar.
+            \item Finalmente, en la función \texttt{play}, se descodifica el archivo de sonido correspondiente y se
+            reproduce utilizando las dos librerías anteriormente mencionadas.
+        \end{enumerate}
+
+    % section Reproducción de sonido (end)
+
     \section{Sonido en paralelo} % (fold)
     \label{sec:SonidoEnParalelo}
 
@@ -93,7 +114,7 @@
 
             Tras muchas pruebas, como aumentar la cantidad de memoria reservada para el \textit{path} o para el
             buffer que se utiliza en la función de reproducción, o probar a que siempre se enviara el mismo path,
-            sin leer del Arduino (reproduciendo el sonido satisfactoriamente), finalmente decido cambiar la forma en
+            sin leer del Arduino (reproduciendo el sonido satisfactoriamente), finalmente se decide cambiar la forma en
             la que se genera el path, \textit{hardcodeándolo} en el programa. Esto resulta funcionar y es la solución
             que ha sido implementada en el programa.
         \end{itemize}
@@ -104,11 +125,23 @@
     \label{sec:Pads}
 
         Los pads son las superficies que son golpeadas para generar los sonidos. Para este proyecto se han fabricado
-        usando madera, cola y gomaeva\cite{GomaEva}. El coste total es de fabricar dos pads es de 3,09\euro{}.
-        Comparado con otros productos similares como los de Prologix\cite{practice_pad}, cuyo kit de práctica de 4
-        pads cuesta \$224,99, el precio de la solución propuesta en este proyecto es sensiblemente inferior.
+        usando madera, cola y gomaeva\cite{GomaEva}. El coste total de fabricar un pad es de 1,54\euro{}. Comparado
+        con otros productos similares como los de Prologix\cite{practice_pad}, cuyo kit de práctica de 4 pads cuesta
+        \$224,99, el precio de la solución propuesta en este proyecto es sensiblemente inferior.
 
     % section Pads (end)
+
+    \section{Tiempo} % (fold)
+    \label{sec:Tiempo}
+
+        Para medir el tiempo que ha llevado realizar este trabajo, se ha utilizado la aplicación
+        Clockify\cite{clockify}.\newline
+
+        En total se han utilizado 113 horas y 54 minutos.%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    % section Tiempo (end)
 
     \section{Coste y presupuesto} % (fold)
     \label{sec:CosteYPresupuesto}
@@ -130,22 +163,11 @@
                 \item Arduino Nano: 15,43\euro{} (incluye gastos de envío)
             \end{itemize}
 
+            El coste de los materiales se queda, finalmente, en 140,50\euro{}.
+
         % subsection Materiales (end)
 
     % section Coste y presupuesto (end)
-
-
-    \section{Tiempo} % (fold)
-    \label{sec:Tiempo}
-
-        Para medir el tiempo que ha llevado realizar este trabajo, se ha utilizado la aplicación
-        Clockify\cite{clockify}.\newline
-
-        En total se han utilizado 74 horas y 24 minutos.%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-    % section Tiempo (end)
 
 % chapter Implementación (end)
 
