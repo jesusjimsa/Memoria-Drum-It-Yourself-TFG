@@ -71,34 +71,45 @@
 
     % section Sonido en paralelo (end)
 
-    \section{Problemas} % (fold)
-    \label{sec:Problemas}
+    \section{Principales problemas} % (fold)
+    \label{sec:PrincipalesProblemas}
 
-        \begin{itemize}
-            \item
-            Debido a la librería utilizada para reproducir sonidos, al lanzar hebras para reproducir varios sonidos al
-            mismo tiempo, se producía en error de \textit{segmentation fault}. La solución a este problema fue sustituir
-            las hebras por procesos.
-            % \item
-            % Relacionado con el problema anterior, intentando reproducir dos sonidos al mismo tiempo, para reducir
-            % la posibilidad de que el usuario toque dos instrumentos al mismo tiempo. En el modelo solo por procesos
-            % se editan los sonidos juntos para que no haya latencia al tocar dos a la vez, haciéndolo con hebras se
-            % ahorra el trabajo de editar los sonidos y no hay combinaciones no contempladas. Sin embargo, el sistema
-            % de reproducción de sonido del sistema operativo no permite reproducir sonidos mediante hebras, solo
-            % procesos.
-            \item
+        \subsection{Número de lecturas en botones} % (fold)
+        \label{sub:NumeroDeLecturasEnBotones}
+
             En el prototipo con botones, al pulsar o dejar pulsado un botón, el programa reproduciría el mismo
             sonido muchas veces. Para solucionar esto se crea una hebra por cada botón, cuando se pulsa, entrará
             en un bucle infinito del que no saldrá hasta que el botón no sea soltado. Al usarse hebras, nos
             permite pulsar más botones al mismo tiempo.
-            \item
+
+        % subsection Número de lecturas en botones (end)
+
+        \subsection{Hebras vs procesos} % (fold)
+        \label{sub:HebrasVSProcesos}
+
+            La primera aproximación a cómo realizar este proyecto fue usando hebras para lanzar los sonidos al mismo
+            tiempo, por ser más ligeras, en cuanto a uso de recursos, que los procesos. Sin embargo, debido a la
+            implementación de librería utilizada para reproducir sonidos, al lanzar hebras para reproducir varios
+            sonidos al mismo tiempo, se producía un error de \textit{segmentation fault}. La solución a este problema
+            fue sustituir las hebras por procesos.
+
+        % subsection Hebras vs procesos (end)
+
+        \subsection{Número de lecturas en sensores} % (fold)
+        \label{sub:NumeroDeLecturasEnSensores}
+
             El sensor de presión devuelve muchas lecturas por segundo. Para solucionar esto a la hora de reproducir los
             sonidos hay dos formas de solucionarlo: una es introduciendo un \textit{delay} lo suficientemente grande
             para diferenciar dos toques del sensor, la otra solución, que ha sido la implementada, trata de bloquear el
-            sensor cada vez que se entra en uno de los tres intervalos de volumen que se han elegido, cada vez que entra
-            de deja de leer hasta que no baje la presión lo suficiente. Si la presión sube tampoco enviará señal para
-            que reproduzca sonido.
-            \item
+            sensor cada vez que se entra en uno de los tres intervalos de volumen que se han elegido. Cada vez que entra
+            en uno de estos intervalos de deja de leer hasta que no baje la presión lo suficiente. Si la presión sube,
+            tampoco enviará señal para que reproduzca sonido.
+
+        % subsection Número de lecturas en sensores (end)
+
+        \subsection{Construcción de paths} % (fold)
+        \label{sub:ConstruccionDePaths}
+
             Al añadir el sensor y el Arduino, el programa que controlaba los sonidos emitidos recibía las mediciones
             del Arduino y, dependiendo de los datos entregados por éste, se emite un sonido a un volumen concreto.
             La construcción de la cadena de texto que contenía el \textit{path} se hacía mediante las funciones de
@@ -115,9 +126,10 @@
             sin leer del Arduino (reproduciendo el sonido satisfactoriamente), finalmente se decide cambiar la forma en
             la que se genera el path, \textit{hardcodeándolo} en el programa. Esto resulta funcionar y es la solución
             que ha sido implementada en el programa.
-        \end{itemize}
 
-    % section Problemas (end)
+        % subsection Construcción de paths (end)
+
+    % section Principales problemas (end)
 
     \section{Pads} % (fold)
     \label{sec:Pads}
@@ -139,7 +151,7 @@
                 \includegraphics[width=\textwidth]{tablero_mdf}
                 \caption{Imagen de tablero MDF\label{fig:TableroMDF}}
             \end{figure}
-        
+
         % subsection Madera MDF (end)
 
         \subsection{Construcción} % (fold)
@@ -167,13 +179,13 @@
             % Imagen de los pad con agujeros pequeños para los cables
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-            Una vez hecho eso, se añade la gomaeva para proteger los sensores y dar una mayor sensación de "rebote" %% cambiar esta palabra
-            al ser golpeado con la baqueta.
+            Una vez hecho eso, se añade la gomaeva para proteger los sensores y dar una mayor sensación de realismo al
+            ser golpeado con la baqueta.
 
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             % Imagen de los pad con la gomaeva
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        
+
         % subsection Construcción (end)
 
     % section Pads (end)
