@@ -13,7 +13,7 @@
 
         \subsection{C} % (fold)
         \label{sub:CLanguage}
-        
+
             El lenguaje utilizado para la mayor parte del proyecto ha sido C. C es un lenguaje desarrollado en 1972 por
             Dennis Ritchie en los Laboratios Bell. Fue creado para la creación de sistemas operativos, como UNIX, y es
             muy valorado por su eficiencia.
@@ -44,9 +44,9 @@
                 \includegraphics[width=\textwidth]{vs_code}
                 \caption{Captura de pantalla de Visual Studio Code \label{fig:VisualStudioCode}}
             \end{figure}
-            
+
             \newpage
-        
+
         % subsection Visual Studio Code (end)
 
         \subsection{Github} % (fold)
@@ -64,9 +64,9 @@
                 \includegraphics[width=\textwidth]{github_issues}
                 \caption{Captura de pantalla de las issues de Github del proyecto \label{fig:GithubIssues}}
             \end{figure}
-            
+
             \newpage
-        
+
         % subsection Github (end)
 
         \subsection{Clockify} % (fold)
@@ -80,7 +80,7 @@
                 \includegraphics[width=\textwidth/2]{clockify}
                 \caption{Captura de pantalla de Clockify \label{fig:ClockifyCaptura}}
             \end{figure}
-        
+
         % subsection Clockify (end)
 
         \subsection{Overleaf} % (fold)
@@ -97,7 +97,7 @@
                 \includegraphics[width=\textwidth]{captura_overleaf}
                 \caption{Captura de pantalla de Overleaf \label{fig:OverleafCaptura}}
             \end{figure}
-        
+
         % subsection Overleaf (end)
 
     % section Tecnologías empleadas (end)
@@ -115,21 +115,34 @@
         \subsection{Librería de reproducción de sonido} % (fold)
         \label{sub:LibreriaDeReproduccionDeSonido}
 
-            \begin{itemize}
-                \item
-                playsound\cite{playsound}: Al principio se comenzó buscando implementar el proyecto en Python, por ser
-                un lenguaje sencillo y con gran variedad de librerías. Sin embargo, tras probar playsound, la librería
-                de reproducción de sonidos más popular de Python, se decidió que era muy lenta, y en este proyecto, la
+            \subsubsection{playsound} % (fold)
+            \label{ssub:Playsound}
+
+                Al principio se comenzó buscando implementar el proyecto en Python, por ser un lenguaje sencillo y con
+                gran variedad de librerías. Sin embargo, tras probar playsound\cite{playsound}, la librería de
+                reproducción de sonidos más popular de Python, se decidió que era muy lenta, y en este proyecto, la
                 velocidad a la que se reproducen los sonidos es primordial. Por esta razón, se descarta playsound.
-                \item
-                mpg123\cite{mpg123}: Librería y programa en C más rápido que playsound de Python. Tiene el problema de
-                hacer que haya fallos de memoria cuando se usan hebras para reproducir varios sonidos al mismo tiempo,
-                pero se soluciona utilizando procesos en su lugar.
-                \item
-                libao\cite{libao}: Esta librería se usa en conjunto con mpg123 para reproducir el sonido de la batería.
-                mpg123 es la encargada de descodificar el archivo mp3 que contiene el sonido, mientras que libao utiliza
-                la información que obtiene mpg123 y manda la señal al sistema operativo para reproducir el audio.
-            \end{itemize}
+
+            % subsubsection playsound (end)
+
+            \subsubsection{mpg123} % (fold)
+            \label{ssub:Mpg123}
+
+                Mpg123\cite{mpg123} es una librería y programa en C más rápido que playsound de Python. Tiene el problema de
+                hacer que haya fallos de memoria cuando se usan hebras para reproducir varios sonidos al mismo tiempo, pero
+                se soluciona utilizando procesos en su lugar.
+
+            % subsubsection mpg123 (end)
+
+            \subsubsection{libao} % (fold)
+            \label{ssub:Libao}
+
+                Esta librería se usa en conjunto con mpg123 para reproducir el sonido de la batería.
+                mpg123 es la encargada de descodificar el archivo mp3 que contiene el sonido, mientras que
+                libao\cite{libao} utiliza la información que obtiene mpg123 y manda la señal al sistema operativo para
+                reproducir el audio.
+
+            % subsubsection libao (end)
 
         % subsection Librería de reproducción de sonido (end)
 
@@ -230,7 +243,7 @@
                 \caption{Esquema de conexión de sensores de presión\cite{force_sensor_arduino}
                          \label{fig:EsquemaConexion}}
             \end{figure}
-        
+
         % subsection Conexión (end)
 
     % section Arduino vs Raspberry Pi (end)
