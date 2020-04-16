@@ -166,11 +166,11 @@
 
             Al pulsar una tecla, el número leído se envía a una función que selecciona qué sonido hay que reproducir en
             ese momento, dependiendo de qué sonido corresponda a ese número. Este proceso de selección se puede hacer
-            con una estructura de \textit{if-else} anidados o con un \textit{switch-case}.\newline
+            con una estructura de \textit{if-else} anidados o con un \textit{switch-case}.
 
             Para decidir cuál de las dos soluciones se implementa en la versión final se realizó un test en el que cada
             vez se ejecutan más iteraciones del programa cambiando de sonido en cada una de ellas. Se empieza con 1
-            iteración y se termina con 10000000 iteraciones.\newline
+            iteración y se termina con 10000000 iteraciones.
 
             \begin{figure}[ht]
                 \centering
@@ -204,7 +204,7 @@
 
             Como se puede ver en la figura \ref{fig:GraficaIfVsSwitch}, la diferencia no es apreciable hasta las
             1000000 iteraciones, pero después pasa a casi 8 segundos de diferencia en 10000000 iteraciones. Por
-            esta razón se ha decidido que la función utilice la estructura \textit{switch-case}.\newline
+            esta razón se ha decidido que la función utilice la estructura \textit{switch-case}.
 
             Finalmente, debido a la manera en la que realizan las comprobaciones de qué botones y sensores son
             utilizados, aunque un \textit{switch-case} es más rápido, esta estructura se reserva para la versión del
@@ -220,15 +220,15 @@
 
         Para la recepción de las señales de los sensores de presión RP c18.3 y RP S40, se plantean dos opciones, se
         puede utilizar la propia Raspberry Pi en la que se ejecuta el programa que maneja los sonidos o una Arduino
-        Nano. En el proyecto resultante se utiliza finalmente la Arduino debido a dos razones principales.\newline
+        Nano. En el proyecto resultante se utiliza finalmente la Arduino debido a dos razones principales.
 
         La primera razón es el precio y la escalabilidad, una Raspberry Pi cuesta 39,95\euro{} mientras que una
         Arduino Nano cuesta 10\euro{}. Una Arduino Nano cuenta con menos pines de E/S, pero añadir una placa es más
-        barato y sencillo que añadir una placa de Raspberry Pi.\newline
+        barato y sencillo que añadir una placa de Raspberry Pi.
 
         La segunda razón es la implementación del programa que se encarga de el sensor de presión. En Internet se
         pueden encontrar ejemplos y tutoriales refiriéndose a cómo implementar el sistema en una Arduino, pero no
-        es tan fácil encontrar información para hacerlo desde una Raspberry Pi.\newline
+        es tan fácil encontrar información para hacerlo desde una Raspberry Pi.
 
         Por estas razones se elige realizar la recepción de las señales del sensor de presión desde la Arduino,
         haciendo el proceso más sencillo y más barato.
