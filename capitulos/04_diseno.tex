@@ -112,14 +112,14 @@
 
         Se decide empezar con la primera alternativa y dejar la segunda para más adelante, en caso de tener tiempo.
 
-        \subsection{Librería de reproducción de sonido} % (fold)
+        \subsection{Biblioteca de reproducción de sonido} % (fold)
         \label{sub:LibreriaDeReproduccionDeSonido}
 
             \subsubsection{playsound} % (fold)
             \label{ssub:Playsound}
 
                 Al principio se comenzó buscando implementar el proyecto en Python, por ser un lenguaje sencillo y con
-                gran variedad de librerías. Sin embargo, tras probar playsound\cite{playsound}, la librería de
+                gran variedad de bibliotecas. Sin embargo, tras probar playsound\cite{playsound}, la biblioteca de
                 reproducción de sonidos más popular de Python, se decidió que era muy lenta, y en este proyecto, la
                 velocidad a la que se reproducen los sonidos es primordial. Por esta razón, se descarta playsound.
 
@@ -128,7 +128,7 @@
             \subsubsection{mpg123} % (fold)
             \label{ssub:Mpg123}
 
-                Mpg123\cite{mpg123} es una librería y programa en C más rápido que playsound de Python. Tiene el problema de
+                Mpg123\cite{mpg123} es una biblioteca y programa en C más rápido que playsound de Python. Tiene el problema de
                 hacer que haya fallos de memoria cuando se usan hebras para reproducir varios sonidos al mismo tiempo, pero
                 se soluciona utilizando procesos en su lugar.
 
@@ -137,29 +137,29 @@
             \subsubsection{libao} % (fold)
             \label{ssub:Libao}
 
-                Esta librería se usa en conjunto con mpg123 para reproducir el sonido de la batería.
+                Esta biblioteca se usa en conjunto con mpg123 para reproducir el sonido de la batería.
                 mpg123 es la encargada de descodificar el archivo mp3 que contiene el sonido, mientras que
                 libao\cite{libao} utiliza la información que obtiene mpg123 y manda la señal al sistema operativo para
                 reproducir el audio.
 
             % subsubsection libao (end)
 
-        % subsection Librería de reproducción de sonido (end)
+        % subsection Biblioteca de reproducción de sonido (end)
 
-        \subsection{Otras librerías} % (fold)
+        \subsection{Otras bibliotecas} % (fold)
         \label{sub:OtrasLibrerias}
 
             \subsubsection{wiringPi} % (fold)
             \label{ssub:WiringPi}
 
-                Para realizar la conexión de sensores y botones a la Raspberry Pi se utiliza la librería
-                wiringPi\cite{wiringPi}, que es la estándar en este tema. Esta librería se ha utilizado unicamente en
+                Para realizar la conexión de sensores y botones a la Raspberry Pi se utiliza la biblioteca
+                wiringPi\cite{wiringPi}, que es la estándar en este tema. Esta biblioteca se ha utilizado unicamente en
                 los prototipos, ya que al principio se pretendía realizar el proyecto enteramente en la Raspberry Pi,
                 pero finalmente se ha utilizado una Arduino para realizar la lectura de sensores.
 
             % subsubsection wiringPi (end)
 
-        % subsection Otras librerías (end)
+        % subsection Otras bibliotecas (end)
 
         \subsection{if-else vs switch} % (fold)
         \label{sub:if-else_vs_switch}

@@ -8,7 +8,7 @@
     \section{Reproducción de sonido} % (fold)
     \label{sec:ReproduccionDeSonido}
 
-        La reproducción del sonido se realiza utilizando las dos librerías mencionadas en el capítulo
+        La reproducción del sonido se realiza utilizando las dos bibliotecas mencionadas en el capítulo
         anterior \ref{sub:LibreriaDeReproduccionDeSonido}, mpg123 y libao.
 
         El proceso completo que se sigue desde que se pulsa uno de los sensores hasta que se reproduce el sonido es el
@@ -21,7 +21,7 @@
             \item En \texttt{parseInstruments} se procesa el mensaje leído.
             \item En la función \texttt{PressToPlay} se selecciona qué instrumento debe sonar.
             \item Finalmente, en la función \texttt{play}, se descodifica el archivo de sonido correspondiente y se
-            reproduce utilizando las dos librerías anteriormente mencionadas.
+            reproduce utilizando las dos bibliotecas anteriormente mencionadas.
         \end{enumerate}
 
     % section Reproducción de sonido (end)
@@ -89,7 +89,7 @@
 
             La primera aproximación a cómo realizar este proyecto fue usando hebras para lanzar los sonidos al mismo
             tiempo, por ser más ligeras, en cuanto a uso de recursos, que los procesos. Sin embargo, debido a la
-            implementación de librería utilizada para reproducir sonidos, al lanzar hebras para reproducir varios
+            implementación de biblioteca utilizada para reproducir sonidos, al lanzar hebras para reproducir varios
             sonidos al mismo tiempo, se producía un error de \textit{segmentation fault}. La solución a este problema
             fue sustituir las hebras por procesos.
 
