@@ -102,6 +102,47 @@
 
     % section Tecnologías empleadas (end)
 
+    \section{Descripción a alto nivel} % (fold)
+    \label{sec:DescripcionAAltoNivel}
+
+        La solución propuesta consta de dos partes principales. La primera parte es la recogida de información y la
+        segunda, el tratamiento de la información y reproducción del sonido.
+
+        \subsection{Recogida de información} % (fold)
+        \label{sub:RecogidaDeInformacion}
+
+            En esta primera fase se recoge la información que devuelven los sensores de fuerza en la placa Arduino. Los
+            cinco sensores se conectan a la Arduino y devuelven un valor entre 0 y 1023. Este valor se junta a los
+            valores leídos por todos los sensores y se manda en un solo mensaje a la Raspberry Pi para empezar la
+            segunda fase.
+
+            \begin{figure}[ht]
+                \centering
+                \includegraphics[width=\textwidth]{flow_arduino}
+                \caption{Diagrama de la recogida de información \label{fig:DiagramaRecogida}}
+            \end{figure}
+
+        % subsection Recogida de información (end)
+
+        \subsection{Tratamiento de la información y reproducción del sonido} % (fold)
+        \label{sub:TratamientoDeLaInformacionYReproduccionDelSonido}
+
+            En esta segunda parte, se recibe la información recogida por la Arduino y se reproducen los sonidos de
+            batería correspondientes. La Arduino envía un mensaje por el log del monitor serie y la Raspberry Pi analiza
+            este mensaje. Una vez separado el mensaje en pares de intrumento y volumen, se reproducen los sonidos
+            correspondientes.
+
+            \begin{figure}[ht]
+                \centering
+                \includegraphics[width=\textwidth]{flow_raspberry_pi}
+                \caption{Diagrama del tratamiento de la información y la reproducción del
+                sonido \label{fig:DiagramaTratamiento}}
+            \end{figure}
+
+        % subsection Tratamiento de la información y reproducción del sonido (end)
+
+    % section Descripción a alto nivel (end)
+
     \section{Decisiones tomadas} % (fold)
     \label{sec:DecisionesTomadas}
 
