@@ -21,7 +21,7 @@
             En la actualidad, es uno de los lenguajes más populares. Está disponible en muchas plataformas, desde
             superordenadores, hasta sistemas empotrados. Fue diseñado para mapear las instrucciones escritas en C a
             lenguaje máquina de forma muy eficiente, con pocas instrucciones, esto hace que sea muy eficiente en
-            cualquier plataforma en la que se utilice.\cite{wikipedia_c_language}
+            cualquier plataforma en la que se utilice \cite{wikipedia_c_language}.
 
             Es por esta eficiencia, por la que se ha utilizado en el proyecto. Cualquier instrumento musical, y en
             especial una batería, requiere que las acciones realizadas por el músico tengan una reacción rápida por el
@@ -162,7 +162,7 @@
             \label{ssub:Playsound}
 
                 Al principio se comenzó buscando implementar el proyecto en Python, por ser un lenguaje sencillo y con
-                gran variedad de bibliotecas. Sin embargo, tras probar playsound\cite{playsound}, la biblioteca de
+                gran variedad de bibliotecas. Sin embargo, tras probar playsound \cite{playsound}, la biblioteca de
                 reproducción de sonidos más popular de Python, se decidió que era muy lenta, y en este proyecto, la
                 velocidad a la que se reproducen los sonidos es primordial. Por esta razón, se descarta playsound.
 
@@ -171,9 +171,9 @@
             \subsubsection{mpg123} % (fold)
             \label{ssub:Mpg123}
 
-                Mpg123\cite{mpg123} es una biblioteca y programa en C más rápido que playsound de Python. Tiene el problema de
-                hacer que haya fallos de memoria cuando se usan hebras para reproducir varios sonidos al mismo tiempo, pero
-                se soluciona utilizando procesos en su lugar.
+                Mpg123 \cite{mpg123} es una biblioteca y programa en C más rápido que playsound de Python. Tiene el
+                problema de hacer que haya fallos de memoria cuando se usan hebras para reproducir varios sonidos al
+                mismo tiempo, pero se soluciona utilizando procesos en su lugar.
 
             % subsubsection mpg123 (end)
 
@@ -182,7 +182,7 @@
 
                 Esta biblioteca se usa en conjunto con mpg123 para reproducir el sonido de la batería.
                 mpg123 es la encargada de descodificar el archivo mp3 que contiene el sonido, mientras que
-                libao\cite{libao} utiliza la información que obtiene mpg123 y manda la señal al sistema operativo para
+                libao \cite{libao} utiliza la información que obtiene mpg123 y manda la señal al sistema operativo para
                 reproducir el audio.
 
             % subsubsection libao (end)
@@ -196,7 +196,7 @@
             \label{ssub:WiringPi}
 
                 Para realizar la conexión de sensores y botones a la Raspberry Pi se utiliza la biblioteca
-                wiringPi\cite{wiringPi}, que es la estándar en este tema. Esta biblioteca se ha utilizado unicamente en
+                wiringPi \cite{wiringPi}, que es la estándar en este tema. Esta biblioteca se ha utilizado unicamente en
                 los prototipos, ya que al principio se pretendía realizar el proyecto enteramente en la Raspberry Pi,
                 pero finalmente se ha utilizado una Arduino para realizar la lectura de sensores.
 
@@ -285,7 +285,7 @@
             \begin{figure}[ht]
                 \centering
                 \includegraphics[width=7cm]{force_sensor_arduino}
-                \caption{Esquema de conexión de sensores de presión\cite{force_sensor_arduino}
+                \caption{Esquema de conexión de sensores de presión \cite{force_sensor_arduino}
                          \label{fig:EsquemaConexion}}
             \end{figure}
 
