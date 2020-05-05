@@ -59,6 +59,9 @@
         0:0
         \end{verbatim}
 
+        En este mensaje, se indica que el pad 2 registra una presión de intensidad 364 (sobre 1023). Los \texttt{0:0}
+        indican que ningún pad registra presión.
+
         Tras la implementación de la solución, el log es así:
 
         \begin{verbatim}
@@ -70,6 +73,28 @@
         1:0:2:0:3:0:4:902:5:0
         0:0
         \end{verbatim}
+
+        En estos mensajes se envía la siguiente información:
+        
+        \begin{enumerate}
+            \item Los mensajes de \texttt{0:0} indican que ningún pad registra presión.
+            \item El primer mensaje indica que se han tocado:
+            \begin{itemize}
+                \item El pad 1 con intensidad 446
+                \item El pad 2 no registra presión
+                \item El pad 3 con intensidad 812
+                \item El pad 4 no registra presión
+                \item El pad 5 no registra presión
+            \end{itemize}
+            \item El segundo mensaje indica que se han tocado:
+            \begin{itemize}
+                \item El pad 1 no registra presión
+                \item El pad 2 no registra presión
+                \item El pad 3 no registra presión
+                \item El pad 4 con intensidad 902
+                \item El pad 5 no registra presión
+            \end{itemize}
+        \end{enumerate}
 
         En cuanto un sensor detecta una presión mayor a 200, se manda el mensaje de todos los sensores al mismo tiempo.
         En caso de que el valor leído sea menor que 200, se manda como 0, pero si es mayor, se manda con los demás. Este
