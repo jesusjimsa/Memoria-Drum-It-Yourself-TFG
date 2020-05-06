@@ -14,7 +14,34 @@
 
         Con la aparición de la informática y los ordenadores se empiezan a almacenar estos sonidos en un formato
         digital, capaz de ser interpretado por ordenadores. En este caso, los sonidos se guardan en forma de bytes en
-        diferentes formatos de archivo, como MP3, AAC, OGG...
+        diferentes formatos de archivo, como MP3, AAC, OGG... Al igual que el software, los formatos de audio pueden ser
+        abiertos o cerrados. Por ejemplo, WMA \cite{wikipedia_wma} o AAC \cite{wikipedia_aac} son formatos propietarios,
+        mientras que OGG \cite{wikipedia_ogg} o ALAC \cite{wikipedia_alac} son formatos abiertos. MP3 pasó a ser un
+        formato abierto a partir de 2017 \cite{mp3_licencia}.
+
+        Los formatos de archivo de audio se pueden ordenar en tres categorías principales:
+
+        \begin{table}[]
+            \resizebox{\textwidth}{!}{%
+            \begin{tabular}{|l|l|l|}
+                \hline
+                \textbf{No comprimidos} & \textbf{Compresión con pérdidas} & \textbf{Compresión sin pérdidas} \\ \hline
+                AU, WAV, AIFF...        & MP3, AAC, OGG...                 & FLAC, ALAC, WMA...               \\ \hline
+            \end{tabular}%
+            }
+            \caption{Tabla con ejemplos de formatos de las tres categorías \cite{formatos_audio}}
+            \label{tab:my-table}
+        \end{table}
+
+        \begin{itemize}
+            \item \textbf{No comprimidos}: Consisten en capturar las ondas del sonido y guardarlas en archivos sin
+            ningún procesamiento posterior.
+            \item \textbf{Compresión con pérdidas}: En el proceso de compresión se pierde algo de información y, con
+            ella, algo de calidad. A cambio de la pérdida de calidad, se obtienen ficheros más ligeros.
+            \item \textbf{Compresión sin pérdidas}: Al contrario que en la compresión con pérdidas, en este tipo de
+            compresión no se pierde nada de información ni de calidad de audio, sin embargo, se obtienen archivos más
+            pesados que en la categoría anterior.
+        \end{itemize}
 
         Los primeros intentos de instrumento musical no analógico se pueden encontrar en los sintetizadores. Estos
         intrumentos utilizan la electricidad para producir las ondas del sonidos pasándola por una serie de módulos.
