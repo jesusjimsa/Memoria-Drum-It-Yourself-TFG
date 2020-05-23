@@ -165,29 +165,38 @@
             \subsubsection{playsound} % (fold)
             \label{ssub:Playsound}
 
-                Al principio se comenzó buscando implementar el proyecto en Python, por ser un lenguaje sencillo y con
-                gran variedad de bibliotecas. Sin embargo, tras probar playsound \cite{playsound}, la biblioteca de
-                reproducción de sonidos más popular de Python, se decidió que era muy lenta, y en este proyecto, la
-                velocidad a la que se reproducen los sonidos es primordial. Por esta razón, se descarta playsound.
+                La primera idea de lenguaje de programación para implementar el proyecto fue Python, por ser un lenguaje
+                sencillo y con gran variedad de bibliotecas. Al investigar las bibliotecas de reproducción de sonidos
+                disponibles para Python, la más recomendada era playsound \cite{playsound}. Se empezaron a hacer pruebas
+                con esta librería, pero la salida del sonido era demasiado lenta para un proyecto como este, en el que
+                el tiempo que pasa entre que se golpea un parche y se produce la salida del sonido, tiene que ser el
+                menor posible. Por esta razón, se decide descartar el uso de Python y playsound.
 
             % subsubsection playsound (end)
 
             \subsubsection{mpg123} % (fold)
             \label{ssub:Mpg123}
 
-                Mpg123 \cite{mpg123} es una biblioteca y programa en C más rápido que playsound de Python. Tiene el
-                problema de hacer que haya fallos de memoria cuando se usan hebras para reproducir varios sonidos al
-                mismo tiempo, pero se soluciona utilizando procesos en su lugar.
+                Tras decidir no utilizar playsound de Python, se empezó a investigar bibliotecas de otros lenguajes de
+                programación. La biblioteca de C, Mpg123 \cite{mpg123}, es una de las más mencionadas en la reproducción
+                de sonido. Por esta razón, se hacen pruebas con la biblioteca y se confirma que es lo suficientemente
+                rápida para el proyecto, así que se decide seguir adelante con ella y es la biblioteca con la que se ha
+                desarrollado el programa que gestiona los sonidos.
+
+                Tiene, sin embargo, un problema en el uso de hebras para reproducir varios sonidos al mismo tiempo. Para
+                solucionar este problema, se utilizan procesos en lugar de hebras, como se explica en la sección
+                \ref{sub:HebrasVSProcesos}.
 
             % subsubsection mpg123 (end)
 
             \subsubsection{libao} % (fold)
             \label{ssub:Libao}
 
-                Esta biblioteca se usa en conjunto con mpg123 para reproducir el sonido de la batería.
-                mpg123 es la encargada de descodificar el archivo mp3 que contiene el sonido, mientras que
-                libao \cite{libao} utiliza la información que obtiene mpg123 y manda la señal al sistema operativo para
-                reproducir el audio.
+                Para utilizar la bibliteca Mpg123 para la reproducción de sonidos, hay que utilizarla en conjunto con
+                libao \cite{libao}. Mpg123 se encarga de descodificar el archivo MP3 que contiene el sonido
+                correspondiente y prepararlo para su reproducción, mientras que libao se encarga de mandar la señal al
+                sistema operativo para reproducirlo. Utilizando estas dos funciones conjuntamente es como se reproduce
+                el sonido en este proyecto.
 
             % subsubsection libao (end)
 
@@ -199,10 +208,15 @@
             \subsubsection{wiringPi} % (fold)
             \label{ssub:WiringPi}
 
-                Para realizar la conexión de sensores y botones a la Raspberry Pi se utiliza la biblioteca
-                wiringPi \cite{wiringPi}, que es la estándar en este tema. Esta biblioteca se ha utilizado unicamente en
-                los prototipos, ya que al principio se pretendía realizar el proyecto enteramente en la Raspberry Pi,
-                pero finalmente se ha utilizado una Arduino para realizar la lectura de sensores.
+                En los primeros prototipos del proyecto se utilizaban botones en lugar de sensores. Estos botones
+                estaban directamente conectados a la Raspberry Pi, ya que aún no se contaba con la Arduino. Por este
+                motivo apareció la necesidad de encontrar una biblioteca que controlara estos botones y la información
+                que le mandaban al programa. La bibliteca más utilizada para este propósito es wiringPi \cite{wiringPi}.
+                Siendo incluso recomendada por la propia Raspberry Pi Foundation \cite{wiringpi_raspberrypi_docu}.
+
+                Finalmente, como se explica en la sección \ref{sec:ArduinoVsRaspberryPi}, se decide utilizar una placa
+                Arduino para la lectura de los sensores, con lo cual la biblioteca wiringPi ya no es necesaria y no es
+                utilizada en la versión final del proyecto.
 
             % subsubsection wiringPi (end)
 
@@ -249,14 +263,14 @@
                 \end{tabular}
             \end{center}
 
-            Como se puede ver en la figura \ref{fig:GraficaIfVsSwitch}, la diferencia no es apreciable hasta las
-            1000000 iteraciones, pero después pasa a casi 8 segundos de diferencia en 10000000 iteraciones. Por
-            esta razón se ha decidido que la función utilice la estructura \textit{switch-case}.
+            Como se puede ver en la figura \ref{fig:GraficaIfVsSwitch}, la diferencia no es apreciable hasta las 1000000
+            iteraciones, pero después pasa a casi 8 segundos de diferencia en 10000000 iteraciones. Por esta razón se ha
+            decidido que la función utilice la estructura \textit{switch-case}.
 
             Finalmente, debido a la manera en la que realizan las comprobaciones de qué botones y sensores son
             utilizados, aunque un \textit{switch-case} es más rápido, esta estructura se reserva para la versión del
-            programa que reproduce los sonidos leyendo del teclado. En el programa que controla los sensores se
-            utiliza una estructura \textit{if-else}.
+            programa que reproduce los sonidos leyendo del teclado. En el programa que controla los sensores se utiliza
+            una estructura \textit{if-else}.
 
         % subsection if-else vs switch (end)
 
@@ -265,26 +279,26 @@
     \section{Arduino vs Raspberry Pi} % (fold)
     \label{sec:ArduinoVsRaspberryPi}
 
-        Para la recepción de las señales de los sensores de presión RP c18.3 y RP S40, se plantean dos opciones, se
-        puede utilizar la propia Raspberry Pi en la que se ejecuta el programa que maneja los sonidos o una Arduino
-        Nano. En el proyecto resultante se utiliza finalmente la Arduino debido a dos razones principales.
+        Para la lectura de las señales de los sensores de presión RP c18.3 y RP S40, se plantean dos opciones, se puede
+        utilizar la propia Raspberry Pi en la que se ejecuta el programa que maneja los sonidos o una Arduino Nano. En
+        el proyecto resultante se utiliza finalmente la Arduino debido a dos razones principales.
 
-        La primera razón es el precio y la escalabilidad, una Raspberry Pi cuesta 39,95\euro{} mientras que una
-        Arduino Nano cuesta 10\euro{}. Una Arduino Nano cuenta con menos pines de E/S, pero añadir una placa es más
-        barato y sencillo que añadir una placa de Raspberry Pi.
+        La primera razón es el precio y la escalabilidad, una Raspberry Pi cuesta 39,95\euro{} mientras que una Arduino
+        Nano cuesta 10\euro{}. Una Arduino Nano cuenta con menos pines de E/S, pero añadir una placa es más barato y
+        sencillo que añadir una placa de Raspberry Pi.
 
-        La segunda razón es la implementación del programa que se encarga de el sensor de presión. En Internet se
-        pueden encontrar ejemplos y tutoriales refiriéndose a cómo implementar el sistema en una Arduino, pero no
-        es tan fácil encontrar información para hacerlo desde una Raspberry Pi.
+        La segunda razón es la implementación del programa que se encarga de el sensor de presión. En Internet se pueden
+        encontrar ejemplos y tutoriales refiriéndose a cómo implementar el sistema en una Arduino, pero no es tan fácil
+        encontrar información para hacerlo desde una Raspberry Pi.
 
-        Por estas razones se elige realizar la recepción de las señales del sensor de presión desde la Arduino,
-        haciendo el proceso más sencillo y más barato.
+        Por estas razones se elige realizar la recepción de las señales del sensor de presión desde la Arduino, haciendo
+        el proceso más sencillo y más barato.
 
         \subsection{Conexión} % (fold)
         \label{sub:Conexion}
 
-            Para realizar la conexión de los sensores se utilizan cables de protoboard conectados de la forma
-            explicada en la figura \ref{fig:EsquemaConexion}:
+            Para realizar la conexión de los sensores se utilizan cables de protoboard conectados de la forma explicada
+            en la figura \ref{fig:EsquemaConexion}:
 
             \begin{figure}[ht]
                 \centering
