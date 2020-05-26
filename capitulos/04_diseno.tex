@@ -190,9 +190,9 @@
                 rápida para el proyecto, así que se decide seguir adelante con ella y es la biblioteca con la que se ha
                 desarrollado el programa que gestiona los sonidos.
 
-                Tiene, sin embargo, un problema en el uso de hebras para reproducir varios sonidos al mismo tiempo. Para
-                solucionar este problema, se utilizan procesos en lugar de hebras, como se explica en la sección
-                \ref{sub:HebrasVSProcesos}.
+                Tiene, sin embargo, un problema en el uso de hebras POSIX para reproducir varios sonidos al mismo
+                tiempo. Para solucionar este problema, se utilizan procesos (lanzados por \texttt{fork()}) en lugar de
+                hebras POSIX, como se explica en la sección \ref{sub:HebrasVSProcesos}.
 
             % subsubsection mpg123 (end)
 

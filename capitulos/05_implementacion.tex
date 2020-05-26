@@ -126,11 +126,12 @@
         \subsection{Hebras vs procesos} % (fold)
         \label{sub:HebrasVSProcesos}
 
-            La primera aproximación a cómo realizar este proyecto fue usando hebras para lanzar los sonidos al mismo
-            tiempo, por ser más ligeras, en cuanto a uso de recursos, que los procesos. Sin embargo, debido a la
-            implementación de biblioteca utilizada para reproducir sonidos, al lanzar hebras para reproducir varios
-            sonidos al mismo tiempo, se producía un error de \textit{segmentation fault}. La solución a este problema
-            fue sustituir las hebras por procesos.
+            La primera aproximación a cómo realizar este proyecto fue usando hebras POSIX para lanzar los sonidos al
+            mismo tiempo, por ser más ligeras, en cuanto a uso de recursos, que los procesos lanzados por \texttt{fork}.
+            Sin embargo, debido a la implementación de biblioteca utilizada para reproducir sonidos, al lanzar estas
+            hebras para reproducir varios sonidos al mismo tiempo, se producía un error de \textit{segmentation fault}.
+            La solución a este problema fue sustituir las hebras POSIX por procesos generados por la llamada a
+            \texttt{fork()}.
 
         % subsection Hebras vs procesos (end)
 
