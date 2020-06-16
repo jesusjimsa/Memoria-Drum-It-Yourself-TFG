@@ -133,7 +133,7 @@
             \begin{figure}[ht]
                 \centering
                 \includegraphics[width=10cm]{estructura_del_mensaje}
-                \caption{Diagrama de la estrutura del mensaje (Valores posibles de 0 a
+                \caption{Diagrama de la estructura del mensaje (Valores posibles de 0 a
                 1023) \label{fig:DiagramaEstrutura}}
             \end{figure}
 
@@ -144,7 +144,7 @@
 
             En esta segunda parte, se recibe la información recogida por la Arduino y se reproducen los sonidos de
             batería correspondientes. La Arduino envía un mensaje por el log del monitor serie y la Raspberry Pi analiza
-            este mensaje. Una vez separado el mensaje en pares de intrumento y volumen, se reproducen los sonidos
+            este mensaje. Una vez separado el mensaje en pares de instrumento y volumen, se reproducen los sonidos
             correspondientes.
 
             \begin{figure}[ht]
@@ -205,7 +205,7 @@
             \subsubsection{libao} % (fold)
             \label{ssub:Libao}
 
-                Para utilizar la bibliteca Mpg123 para la reproducción de sonidos, hay que utilizarla en conjunto con
+                Para utilizar la biblioteca Mpg123 para la reproducción de sonidos, hay que utilizarla en conjunto con
                 libao \cite{libao}. Mpg123 se encarga de descodificar el archivo MP3 que contiene el sonido
                 correspondiente y prepararlo para su reproducción, mientras que libao se encarga de mandar la señal al
                 sistema operativo para reproducirlo. Utilizando estas dos funciones conjuntamente es como se reproduce
@@ -224,7 +224,7 @@
                 En los primeros prototipos del proyecto se utilizaban botones en lugar de sensores. Estos botones
                 estaban directamente conectados a la Raspberry Pi, ya que aún no se contaba con la Arduino. Por este
                 motivo apareció la necesidad de encontrar una biblioteca que controlara estos botones y la información
-                que le mandaban al programa. La bibliteca más utilizada para este propósito es wiringPi \cite{wiringPi}.
+                que le mandaban al programa. La biblioteca más utilizada para este propósito es wiringPi \cite{wiringPi}.
                 Siendo incluso recomendada por la propia Raspberry Pi Foundation \cite{wiringpi_raspberrypi_docu}.
 
                 Finalmente, como se explica en la sección \ref{sec:ArduinoVsRaspberryPi}, se decide utilizar una placa
